@@ -16,8 +16,7 @@
 title: Matija Marić
 email: matija.maric@fer.hr
 description: >- # this means to ignore newlines until "baseurl:"
-  Graduate Computer Science student at University of Zagreb. Aspiring data scientist and software developer. 
-  You will be assimilated. Resistance is futile.
+  hive mind
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://matijamaric.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: realMatijaMaric
