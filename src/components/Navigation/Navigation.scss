@@ -1,0 +1,12 @@
+.Navigation {
+  padding: 20px;
+  ul > * {
+    font-size: 40px;
+    display: block;
+    text-decoration: none;
+    color: white;
+    &.active {
+      color: wheat;
+    }
+  }
+}
