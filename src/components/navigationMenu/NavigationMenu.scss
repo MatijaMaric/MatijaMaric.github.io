@@ -1,0 +1,13 @@
+.navigation-container {
+  padding: 20px;
+  ul > * {
+    font-size: 36px;
+    color: #abc2ce;
+    text-decoration: none;
+    margin-right: 3px;
+    &.active {
+      color: #70b8df;
+      font-weight: 600;
+    }
+  }
+}
