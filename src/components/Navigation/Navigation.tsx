@@ -21,20 +21,35 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
   }
 
   public render(): React.ReactNode {
+    const { extended } = this.state;
+
     return (
       <div className="Navigation">
         <Hamburger className="Hamburger" onClick={this.toggleExtended} />
         <ul className={classNames('Menu', { extended: this.state.extended })}>
-          <NavLink exact={true} to="/" onClick={this.toggleExtended}>
+          <NavLink
+            exact={true}
+            to="/"
+            onClick={extended ? this.toggleExtended : undefined}
+          >
             Home
           </NavLink>
-          <NavLink to="/about" onClick={this.toggleExtended}>
+          <NavLink
+            to="/about"
+            onClick={extended ? this.toggleExtended : undefined}
+          >
             About
           </NavLink>
-          <NavLink to="/cv" onClick={this.toggleExtended}>
+          <NavLink
+            to="/cv"
+            onClick={extended ? this.toggleExtended : undefined}
+          >
             CV
           </NavLink>
-          <NavLink to="/blog" onClick={this.toggleExtended}>
+          <NavLink
+            to="/blog"
+            onClick={extended ? this.toggleExtended : undefined}
+          >
             Blog
           </NavLink>
         </ul>

@@ -1,0 +1,24 @@
+.Blog {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  height: 100%;
+  margin: 50px;
+  &__title {
+    font-size: 64px;
+  }
+
+  &__body {
+    margin-top: 20px;
+    font-size: 32px;
+    flex-grow: 9999;
+
+    display: flex;
+    flex-direction: row;
+
+    &__picture {
+      height: 400px;
+      border-radius: 10px;
+    }
+  }
+}
