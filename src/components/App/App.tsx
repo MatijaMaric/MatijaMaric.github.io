@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.scss';
+import { Route, Switch } from 'react-router';
 import Navigation from '../Navigation/Navigation';
 import Home from '../Home/Home';
-import { Route, Switch } from 'react-router';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 class App extends React.Component {

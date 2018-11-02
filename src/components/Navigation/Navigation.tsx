@@ -3,11 +3,28 @@ import { NavLink } from 'react-router-dom';
 
 import './Navigation.scss';
 
-class Navigation extends React.Component {
+import classNames from 'classnames';
+import { ReactComponent as Hamburger } from '../../assets/hamburger.svg';
+
+interface NavigationProps {}
+
+interface NavigationState {
+  extended: boolean;
+}
+
+class Navigation extends React.Component<NavigationProps, NavigationState> {
+  public constructor(props: NavigationProps) {
+    super(props);
+    this.state = {
+      extended: false
+    };
+  }
+
   public render(): React.ReactNode {
     return (
       <div className="Navigation">
-        <ul>
+        <Hamburger className="Hamburger" onClick={this.toggleExtended} />
+        <ul className={classNames('Menu', { extended: this.state.extended })}>
           <NavLink exact={true} to="/">
             Home
           </NavLink>
@@ -18,6 +35,12 @@ class Navigation extends React.Component {
       </div>
     );
   }
+
+  private toggleExtended = () => {
+    this.setState({
+      extended: !this.state.extended
+    });
+  };
 }
 
 export default Navigation;

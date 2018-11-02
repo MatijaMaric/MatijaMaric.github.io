@@ -1,12 +1,25 @@
 .Navigation {
+  .Hamburger {
+    fill: white;
+    &:hover {
+      fill: gray;
+    }
+  }
   padding: 20px;
-  ul > * {
-    font-size: 40px;
-    display: block;
-    text-decoration: none;
-    color: white;
-    &.active {
-      color: wheat;
+  .Menu {
+    margin-left: -200px;
+    transition: margin-left 0.5s;
+    &.extended {
+      margin-left: 0;
+    }
+    & > * {
+      font-size: 40px;
+      display: block;
+      text-decoration: none;
+      color: white;
+      &.active {
+        color: wheat;
+      }
     }
   }
 }
