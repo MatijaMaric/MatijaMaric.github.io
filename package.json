@@ -1,0 +1,20 @@
+{
+  "name": "MatijaMaric.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/MatijaMaric/MatijaMaric.github.io.git",
+  "author": "Matija Maric <sirSlani@gmail.com>",
+  "license": "MIT",
+  "homepage": "http://matija.codes",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -d build"
+  },
+  "devDependencies": {
+    "typescript": "^3.1.6",
+    "webpack": "^4.24.0"
+  },
+  "dependencies": {
+    "gh-pages": "^2.0.1"
+  }
+}
