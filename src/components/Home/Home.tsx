@@ -7,7 +7,7 @@ class Home extends React.Component {
     return (
       <div className="Home">
         <div className="Home__title">HENLO I AM PROGRAM</div>
-        <div className="Home__body">beepboop dog</div>
+        <div className="Home__body">beep boop dog</div>
       </div>
     );
   }

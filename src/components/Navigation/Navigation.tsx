@@ -25,12 +25,18 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
       <div className="Navigation">
         <Hamburger className="Hamburger" onClick={this.toggleExtended} />
         <ul className={classNames('Menu', { extended: this.state.extended })}>
-          <NavLink exact={true} to="/">
+          <NavLink exact={true} to="/" onClick={this.toggleExtended}>
             Home
           </NavLink>
-          <NavLink to="/about">About</NavLink>
-          <NavLink to="/cv">CV</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/about" onClick={this.toggleExtended}>
+            About
+          </NavLink>
+          <NavLink to="/cv" onClick={this.toggleExtended}>
+            CV
+          </NavLink>
+          <NavLink to="/blog" onClick={this.toggleExtended}>
+            Blog
+          </NavLink>
         </ul>
       </div>
     );
