@@ -23,7 +23,11 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
   public render(): React.ReactNode {
     return (
       <div className="Navigation">
-        <Hamburger className="Hamburger" onClick={this.toggleExtended} />
+        <Hamburger
+          className="Hamburger"
+          onClick={this.toggleExtended}
+          style={{ display: this.state.extended ? 'none' : 'initial' }}
+        />
         <ul className={classNames('Menu', { extended: this.state.extended })}>
           <NavLink exact={true} to="/" onClick={this.toggleExtended}>
             Home
