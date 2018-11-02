@@ -25,7 +25,7 @@
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive --usePolling",
     "predeploy": "npm run build",
     "deploy": "echo matija.codes > ./build/CNAME && gh-pages -b master -d build",
     "start-js": "react-scripts-ts start",
