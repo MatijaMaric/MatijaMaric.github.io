@@ -9,7 +9,7 @@ class App extends React.Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact={true} path="/" component={Home} />
           <Route component={PageNotFound} />
         </Switch>
       </div>
