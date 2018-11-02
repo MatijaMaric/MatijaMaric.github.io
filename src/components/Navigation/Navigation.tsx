@@ -21,8 +21,6 @@ class Navigation extends React.Component<NavigationProps, NavigationState> {
   }
 
   public render(): React.ReactNode {
-    const { extended } = this.state;
-
     return (
       <div className="Navigation">
         <Hamburger className="Hamburger" onClick={this.toggleExtended} />
