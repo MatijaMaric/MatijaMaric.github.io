@@ -1,16 +1,16 @@
 .Home {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  height: 100%;
-  margin: 50px;
-  &__title {
-    font-size: 64px;
-  }
+	display: flex;
+	flex-direction: column;
+	color: white;
+	height: 100%;
+	margin: 50px;
+	&__title {
+		font-size: 64px;
+	}
 
-  &__body {
-    margin-top: 20px;
-    font-size: 32px;
-    flex-grow: 9999;
-  }
+	&__body {
+		margin-top: 20px;
+		font-size: 32px;
+		flex-grow: 9999;
+	}
 }
