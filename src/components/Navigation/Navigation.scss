@@ -2,7 +2,8 @@
   position: absolute;
   padding: 20px;
   width: 400px;
-  height: 100%;
+  top: 0;
+  bottom: 0;
 
   .Hamburger {
     fill: white;
@@ -13,10 +14,10 @@
 
   .Menu {
     top: 0;
+    bottom: 0;
     position: absolute;
     left: -500px;
     transition: all 0.5s;
-    height: 100%;
     padding-top: 80px;
     padding-left: 20px;
     padding-right: 100px;
