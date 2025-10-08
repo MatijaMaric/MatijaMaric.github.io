@@ -11,4 +11,53 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  body {
+    background-color: #0a0a0f;
+  }
+}
+
+@layer utilities {
+  .neon-glow-cyan {
+    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+  }
+  
+  .neon-glow-magenta {
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  }
+  
+  .neon-glow-purple {
+    text-shadow: 0 0 10px #9d00ff, 0 0 20px #9d00ff, 0 0 30px #9d00ff;
+  }
+  
+  .neon-glow-green {
+    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  }
+  
+  .neon-border-cyan {
+    border-color: #00ffff;
+    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+  }
+  
+  .neon-border-magenta {
+    border-color: #ff00ff;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, inset 0 0 10px #ff00ff;
+  }
+  
+  .neon-border-purple {
+    border-color: #9d00ff;
+    box-shadow: 0 0 10px #9d00ff, 0 0 20px #9d00ff, inset 0 0 10px #9d00ff;
+  }
+  
+  .neon-box-cyan {
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  }
+  
+  .neon-box-magenta {
+    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+  }
+  
+  .neon-box-purple {
+    box-shadow: 0 0 20px #9d00ff, 0 0 40px #9d00ff;
+  }
 }
