@@ -10,7 +10,8 @@ Visit the website at: [www.matijamaric.com](https://www.matijamaric.com)
 
 - **Vite** - Fast build tool and development server
 - **Vanilla JavaScript** - Pure JavaScript, no frameworks
-- **CSS3** - Modern styling with CSS custom properties
+- **Tailwind CSS** - Utility-first CSS framework
+- **PostCSS** - CSS transformation with Autoprefixer
 - **GitHub Pages** - Hosting platform
 
 ## 🚀 Development
