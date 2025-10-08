@@ -45,13 +45,14 @@ The site is automatically deployed to GitHub Pages using GitHub Actions when cha
 
 1. Push changes to the `master` branch
 2. GitHub Actions automatically builds the site using `npm run build`
-3. The built files from the `dist` folder are deployed to GitHub Pages
+3. The built files from the `dist` folder are deployed to the `gh-pages` branch
+4. GitHub Pages serves the site from the `gh-pages` branch
 
 ### Custom Domain
 
 The custom domain `www.matijamaric.com` is configured via the CNAME file in the `public` directory. Make sure to:
 1. Configure DNS settings to point to GitHub Pages
-2. Enable GitHub Pages in repository settings (Settings → Pages → Source: GitHub Actions)
+2. Enable GitHub Pages in repository settings (Settings → Pages → Source: Deploy from a branch → Branch: gh-pages)
 
 ## 📝 License
 
