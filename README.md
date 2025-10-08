@@ -54,6 +54,14 @@ The custom domain `www.matijamaric.com` is configured via the CNAME file in the 
 1. Configure DNS settings to point to GitHub Pages
 2. Enable GitHub Pages in repository settings (Settings → Pages → Source: Deploy from a branch → Branch: gh-pages)
 
+### Troubleshooting
+
+**MIME Type Error**: If you see an error like "Loading module from https://matijamaric.github.io/src/style.css was blocked because of a disallowed MIME type", it means:
+- GitHub Pages is not configured correctly
+- Make sure Pages is set to deploy from the `gh-pages` branch (not master)
+- Wait for the GitHub Actions workflow to complete after pushing to master
+- The gh-pages branch should contain the built files, not the source code
+
 ## 📝 License
 
 © 2024 Matija Marić. All rights reserved.
