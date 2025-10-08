@@ -65,7 +65,7 @@ document.querySelector('#app').innerHTML = `
       </p>
       <div class="contact-links">
         <a href="https://github.com/MatijaMaric" target="_blank" rel="noopener noreferrer" class="contact-link">GitHub</a>
-        <a href="https://linkedin.com/in/matijamaric" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/matija-maric/" target="_blank" rel="noopener noreferrer" class="contact-link">LinkedIn</a>
         <a href="mailto:contact@matijamaric.com" class="contact-link">Email</a>
       </div>
     </section>
