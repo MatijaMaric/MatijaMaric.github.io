@@ -38,11 +38,19 @@ npm run preview
 
 ## 📦 Deployment
 
-The site is automatically deployed to GitHub Pages. The `dist` folder contains the built static files.
+The site is automatically deployed to GitHub Pages using GitHub Actions when changes are pushed to the `main` branch.
+
+### Deployment Workflow
+
+1. Push changes to the `main` branch
+2. GitHub Actions automatically builds the site using `npm run build`
+3. The built files from the `dist` folder are deployed to GitHub Pages
 
 ### Custom Domain
 
-The custom domain `www.matijamaric.com` is configured via the CNAME file in the `public` directory.
+The custom domain `www.matijamaric.com` is configured via the CNAME file in the `public` directory. Make sure to:
+1. Configure DNS settings to point to GitHub Pages
+2. Enable GitHub Pages in repository settings (Settings → Pages → Source: GitHub Actions)
 
 ## 📝 License
 
