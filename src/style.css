@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -13,51 +13,74 @@
   }
   
   body {
-    background-color: #0a0a0f;
+    background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 50%, #16213e 100%);
+    min-height: 100vh;
   }
 }
 
 @layer utilities {
-  .neon-glow-cyan {
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+  /* Liquid Glass Effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
-  .neon-glow-magenta {
-    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   
-  .neon-glow-purple {
-    text-shadow: 0 0 10px #9d00ff, 0 0 20px #9d00ff, 0 0 30px #9d00ff;
+  .glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
   
-  .neon-glow-green {
-    text-shadow: 0 0 10px #39ff14, 0 0 20px #39ff14, 0 0 30px #39ff14;
+  .glass-hover:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
   }
   
-  .neon-border-cyan {
-    border-color: #00ffff;
-    box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, inset 0 0 10px #00ffff;
+  /* Apple-inspired subtle glow effects */
+  .subtle-glow-blue {
+    text-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
   }
   
-  .neon-border-magenta {
-    border-color: #ff00ff;
-    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, inset 0 0 10px #ff00ff;
+  .subtle-glow-purple {
+    text-shadow: 0 0 20px rgba(186, 104, 200, 0.3);
   }
   
-  .neon-border-purple {
-    border-color: #9d00ff;
-    box-shadow: 0 0 10px #9d00ff, 0 0 20px #9d00ff, inset 0 0 10px #9d00ff;
+  .subtle-glow-cyan {
+    text-shadow: 0 0 20px rgba(77, 208, 225, 0.3);
   }
   
-  .neon-box-cyan {
-    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+  /* Apple HIG button styles */
+  .apple-button {
+    background: rgba(100, 181, 246, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1.5px solid rgba(100, 181, 246, 0.3);
+    box-shadow: 0 4px 16px rgba(100, 181, 246, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .neon-box-magenta {
-    box-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+  .apple-button:hover {
+    background: rgba(100, 181, 246, 0.25);
+    border-color: rgba(100, 181, 246, 0.5);
+    box-shadow: 0 8px 24px rgba(100, 181, 246, 0.3);
+    transform: translateY(-1px);
   }
   
-  .neon-box-purple {
-    box-shadow: 0 0 20px #9d00ff, 0 0 40px #9d00ff;
+  /* Smooth transitions per Apple HIG */
+  .smooth-transition {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

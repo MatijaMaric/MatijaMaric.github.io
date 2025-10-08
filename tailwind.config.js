@@ -16,14 +16,23 @@ export default {
           DEFAULT: '#1e40af',
           light: '#60a5fa',
         },
-        neon: {
-          cyan: '#00ffff',
-          magenta: '#ff00ff',
-          purple: '#9d00ff',
-          green: '#39ff14',
-          pink: '#ff10f0',
-          blue: '#00d4ff',
+        // Apple-inspired color palette
+        apple: {
+          blue: '#007AFF',
+          indigo: '#5856D6',
+          purple: '#AF52DE',
+          pink: '#FF2D55',
+          cyan: '#5AC8FA',
+          teal: '#5AC8FA',
         },
+        glass: {
+          light: 'rgba(255, 255, 255, 0.1)',
+          DEFAULT: 'rgba(255, 255, 255, 0.05)',
+          dark: 'rgba(0, 0, 0, 0.2)',
+        },
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
