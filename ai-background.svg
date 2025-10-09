@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <!-- Radial gradients for organic shapes -->
+    <radialGradient id="grad1" cx="30%" cy="30%">
+      <stop offset="0%" style="stop-color:#6366f1;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="grad2" cx="70%" cy="70%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="grad3" cx="50%" cy="80%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#a855f7;stop-opacity:0" />
+    </radialGradient>
+    
+    <radialGradient id="grad4" cx="20%" cy="60%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Noise filter for texture -->
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" />
+      <feColorMatrix type="saturate" values="0" />
+      <feBlend mode="overlay" in2="SourceGraphic" />
+    </filter>
+    
+    <!-- Blur filters for depth -->
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+    
+    <filter id="blur2">
+      <feGaussianBlur stdDeviation="120" />
+    </filter>
+    
+    <filter id="blur3">
+      <feGaussianBlur stdDeviation="60" />
+    </filter>
+  </defs>
+  
+  <!-- Background base -->
+  <rect width="1920" height="1080" fill="#0a0a1e"/>
+  
+  <!-- Large organic blobs - AI-art style -->
+  <ellipse cx="400" cy="300" rx="500" ry="400" fill="url(#grad1)" filter="url(#blur1)" opacity="0.7"/>
+  <ellipse cx="1500" cy="800" rx="600" ry="500" fill="url(#grad2)" filter="url(#blur1)" opacity="0.6"/>
+  <ellipse cx="1000" cy="950" rx="450" ry="350" fill="url(#grad3)" filter="url(#blur2)" opacity="0.5"/>
+  <ellipse cx="300" cy="700" rx="400" ry="500" fill="url(#grad4)" filter="url(#blur1)" opacity="0.4"/>
+  
+  <!-- Medium blobs for depth -->
+  <ellipse cx="1200" cy="200" rx="300" ry="250" fill="url(#grad1)" filter="url(#blur3)" opacity="0.5"/>
+  <ellipse cx="600" cy="600" rx="350" ry="280" fill="url(#grad2)" filter="url(#blur3)" opacity="0.4"/>
+  <ellipse cx="1600" cy="400" rx="280" ry="320" fill="url(#grad3)" filter="url(#blur2)" opacity="0.45"/>
+  
+  <!-- Abstract geometric paths -->
+  <path d="M 0,540 Q 480,300 960,540 T 1920,540" 
+        fill="none" 
+        stroke="url(#grad1)" 
+        stroke-width="3" 
+        opacity="0.3" 
+        filter="url(#blur3)"/>
+  
+  <path d="M 0,700 Q 640,500 1280,700 T 1920,700" 
+        fill="none" 
+        stroke="url(#grad2)" 
+        stroke-width="2" 
+        opacity="0.25" 
+        filter="url(#blur3)"/>
+  
+  <!-- Small accent blobs -->
+  <ellipse cx="800" cy="150" rx="150" ry="120" fill="url(#grad3)" filter="url(#blur3)" opacity="0.6"/>
+  <ellipse cx="1700" cy="650" rx="180" ry="140" fill="url(#grad4)" filter="url(#blur3)" opacity="0.5"/>
+  <ellipse cx="200" cy="950" rx="160" ry="130" fill="url(#grad1)" filter="url(#blur3)" opacity="0.55"/>
+  
+  <!-- Subtle overlay for AI-generated feel -->
+  <rect width="1920" height="1080" fill="url(#grad1)" opacity="0.05" filter="url(#noise)"/>
+</svg>
