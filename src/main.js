@@ -22,8 +22,8 @@ document.querySelector('#app').innerHTML = `
     <section class="relative py-32 px-8 text-center overflow-hidden">
       <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
       <div class="max-w-3xl mx-auto relative z-10">
-        <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white subtle-glow-purple">Developer & Problem Solver</h2>
-        <p class="text-xl mb-10 text-gray-300">Building elegant solutions to complex problems</p>
+        <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white subtle-glow-purple">Software Engineer</h2>
+        <p class="text-xl mb-10 text-gray-300">Full-stack developer specializing in C#, JavaScript, and modern web technologies</p>
         <a href="#contact" class="apple-button inline-block py-4 px-10 rounded-2xl font-semibold text-white">Get In Touch</a>
       </div>
     </section>
@@ -32,8 +32,9 @@ document.querySelector('#app').innerHTML = `
       <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-blue">About Me</h2>
       <div class="glass-card rounded-3xl p-8 md:p-12">
         <p class="text-lg max-w-3xl mx-auto text-center text-gray-300 leading-relaxed">
-          I'm a passionate software developer with a focus on creating clean, efficient, and user-friendly applications. 
-          I love tackling challenging problems and continuously learning new technologies.
+          Software engineer with experience in full-stack development across multiple programming languages and frameworks. 
+          Passionate about clean code, problem-solving, and building efficient solutions. Active participant in coding challenges 
+          including Advent of Code, demonstrating strong algorithmic thinking and adaptability to different programming paradigms.
         </p>
       </div>
     </section>
@@ -43,15 +44,15 @@ document.querySelector('#app').innerHTML = `
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
         <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
           <h3 class="text-2xl mb-4 text-blue-300 font-semibold">Frontend</h3>
-          <p class="text-gray-300">HTML, CSS, JavaScript, React, Vue</p>
+          <p class="text-gray-300">JavaScript, React, Vue, Tailwind CSS, Vite</p>
         </div>
         <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
           <h3 class="text-2xl mb-4 text-cyan-300 font-semibold">Backend</h3>
-          <p class="text-gray-300">Node.js, Python, Java, SQL</p>
+          <p class="text-gray-300">C#, .NET, Node.js, Python, Go</p>
         </div>
         <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">Tools & Technologies</h3>
-          <p class="text-gray-300">Git, Docker, CI/CD, Cloud Services</p>
+          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">Other Languages</h3>
+          <p class="text-gray-300">Rust, Python, Go, SQL</p>
         </div>
       </div>
     </section>
@@ -60,8 +61,19 @@ document.querySelector('#app').innerHTML = `
       <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-purple">Projects</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
         <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">Project Coming Soon</h3>
-          <p class="text-gray-300">Stay tuned for my latest work and contributions</p>
+          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">WakeOnLan</h3>
+          <p class="text-gray-300 mb-4">C# utility application for network device management using Wake-on-LAN protocol</p>
+          <a href="https://github.com/MatijaMaric/WakeOnLan" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300">View on GitHub →</a>
+        </div>
+        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
+          <h3 class="text-2xl mb-4 text-cyan-300 font-semibold">Advent of Code</h3>
+          <p class="text-gray-300 mb-4">Solutions to Advent of Code challenges (2017-2021) in Python, Rust, Go, and C#</p>
+          <a href="https://github.com/MatijaMaric?tab=repositories&q=aoc" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300">View Projects →</a>
+        </div>
+        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
+          <h3 class="text-2xl mb-4 text-blue-300 font-semibold">speedlog</h3>
+          <p class="text-gray-300 mb-4">JavaScript application for tracking and logging speed-related data</p>
+          <a href="https://github.com/MatijaMaric/speedlog" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">View on GitHub →</a>
         </div>
       </div>
     </section>
