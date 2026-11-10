@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Page not found — Matija Marić</title>
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3f3f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="preload" href="/src/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script>
+      try {
+        var t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+  </head>
+
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-acute" viewBox="0 0 464 521">
+        <path d="M177.7 520.5 0 420.5 190.7 0l273 174.1z" fill="currentColor" />
+      </symbol>
+    </svg>
+
+    <main class="wrap lost__main">
+      <h1 class="lost__code" aria-label="404">
+        4<span class="lost__zero">0<svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg></span>4
+      </h1>
+      <p class="lost__text">Nothing lives at this address. It may have moved, or it never existed.</p>
+      <p class="links"><a class="lost__back" href="/">Back to the front page</a></p>
+    </main>
+  </body>
+</html>

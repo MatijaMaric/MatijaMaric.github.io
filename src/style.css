@@ -1,117 +1,983 @@
-@import "tailwindcss";
+/* ------------------------------------------------------------------ fonts */
 
-@layer base {
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  body {
-    background: #0a0a1e;
-    min-height: 100vh;
-    position: relative;
-  }
-  
-  /* AI-generated art background */
-  body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/ai-background.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    opacity: 0.8;
-    z-index: -2;
-    pointer-events: none;
-  }
-  
-  /* Add noise/grain texture overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03;
-    z-index: -1;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    pointer-events: none;
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  src: url('./fonts/schibsted-grotesk.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./fonts/jetbrains-mono.woff2') format('woff2');
+  font-weight: 400 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Arial reshaped to Schibsted Grotesk's metrics, so nothing jumps on swap. */
+@font-face {
+  font-family: 'Schibsted Fallback';
+  src: local('Arial'), local('Helvetica Neue'), local('Liberation Sans');
+  font-weight: 400 600;
+  size-adjust: 104%;
+  ascent-override: 94%;
+  descent-override: 24.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Schibsted Fallback';
+  src:
+    local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 700 900;
+  size-adjust: 104%;
+  ascent-override: 94%;
+  descent-override: 24.8%;
+  line-gap-override: 0%;
+}
+
+/* ----------------------------------------------------------------- tokens */
+
+:root {
+  color-scheme: light dark;
+
+  --paper: light-dark(#f3f3f1, #0e0e0d);
+  --ink: light-dark(#111110, #ededea);
+  --muted: light-dark(#62625e, #a1a19b);
+  --line: light-dark(rgb(17 17 16 / 0.16), rgb(237 237 234 / 0.2));
+  --wash: light-dark(rgb(17 17 16 / 0.05), rgb(237 237 234 / 0.07));
+  --accent: light-dark(#e11d2e, #ff4a57);
+
+  --sans: 'Schibsted Grotesk', 'Schibsted Fallback', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --gap: clamp(1rem, 2vw, 1.5rem);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Left side bearing of the heavy capitals. Pulling big type out by this
+     much puts its stems on the margin instead of just inside it. */
+  --bearing: -0.046em;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+/* ------------------------------------------------------------------- base */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  font-synthesis: none;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line);
+  text-underline-offset: 0.22em;
+  transition: text-decoration-color 0.2s;
+}
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+img,
+svg {
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), 85rem);
+  margin-inline: auto;
+}
+
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: 0.75rem;
+  z-index: 10;
+  padding: 0.5rem 0.875rem;
+  background: var(--ink);
+  color: var(--paper);
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+.skip:focus {
+  transform: none;
+}
+
+/*
+  The acute accent from the ć is the site's one graphic mark, and it is only
+  ever used as an accent: hovering a title puts one over its first letter.
+  Sized and placed where the font itself would set an acute.
+*/
+.accented {
+  --lh: 1.2; /* the element's line-height, unitless */
+  --rise: 0.647; /* above a capital; .accented--x sits above a lowercase */
+  --tick-x: 0.2em;
+  position: relative;
+}
+.accented--x {
+  --rise: 0.471;
+  --tick-x: 0.13em;
+}
+.tick {
+  width: 0.226em;
+  height: 0.254em;
+  color: var(--accent);
+}
+.accented .tick {
+  position: absolute;
+  left: var(--tick-x);
+  top: calc((var(--lh) / 2 - var(--rise)) * 1em);
+  opacity: 0;
+  translate: -0.12em 0.16em;
+  transition:
+    translate 0.35s var(--ease),
+    opacity 0.12s;
+}
+a:hover .accented .tick,
+a:focus-visible .accented .tick {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ----------------------------------------------------------------- header */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.25rem;
+  padding-block: 1.25rem;
+  font-size: 0.9375rem;
+}
+
+.locale {
+  margin-right: auto;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.site-nav {
+  display: flex;
+  gap: clamp(0.875rem, 2.5vw, 1.75rem);
+}
+.site-nav a {
+  padding-block: 0.5rem;
+  text-decoration-color: transparent;
+}
+.site-nav a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: -0.625rem;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+.theme-toggle[hidden] {
+  display: none;
+}
+.theme-toggle:hover {
+  background: var(--wash);
+}
+.theme-toggle svg {
+  transition: rotate 0.5s var(--ease);
+}
+:root[data-theme='dark'] .theme-toggle svg {
+  rotate: 180deg;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .theme-toggle svg {
+    rotate: 180deg;
   }
 }
 
-@layer utilities {
-  /* Liquid Glass Effects */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+/* ------------------------------------------------------------------- hero */
+
+.hero {
+  padding-top: clamp(2rem, 7vh, 5rem);
+  padding-bottom: clamp(4rem, 9vw, 8rem);
+}
+
+.hero__grid {
+  container-type: inline-size;
+  --lead-size: clamp(1.375rem, 0.95rem + 1.9cqi, 2.25rem);
+  --lead-gap: clamp(2.5rem, 6.5cqi, 5rem);
+}
+
+.name {
+  /* Stacked on small screens. The wider word, "Matija", inks 2.883em. */
+  font-size: calc(100cqi / 2.89);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  margin-left: var(--bearing);
+}
+
+.name__line {
+  display: block;
+  overflow: hidden;
+  /* Room for the accent and the j's tail inside the reveal mask. */
+  padding: 0.2em 0.06em 0.24em;
+  margin: -0.2em -0.06em -0.24em;
+}
+.name__line + .name__line {
+  margin-top: -0.27em;
+}
+
+.name__word {
+  display: inline-block;
+  animation: rise 0.8s var(--ease) both;
+}
+.name__line + .name__line .name__word {
+  animation-delay: 0.06s;
+}
+
+/*
+  The ć is drawn twice: once in ink with its accent clipped away, and once in
+  red with everything but the accent clipped away. The split sits in the gap
+  between the top of the c and the bottom of the accent: 0.56em above the
+  baseline, which at this line-height is 0.23em below the top of the box.
+*/
+.c-acute {
+  --split: 0.23em;
+  position: relative;
+  display: inline-block;
+  line-height: inherit;
+}
+.c-acute__c {
+  display: inline-block;
+  clip-path: inset(var(--split) -0.3em -0.4em -0.3em);
+}
+.c-acute::after {
+  content: 'ć';
+  content: 'ć' / '';
+  position: absolute;
+  inset: 0;
+  color: var(--accent);
+  clip-path: inset(-0.4em -0.3em calc(100% - var(--split)) -0.3em);
+  animation: strike 0.3s 0.6s cubic-bezier(0.5, 0, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(112%);
   }
-  
-  .glass-strong {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes strike {
+  from {
+    clip-path: inset(-0.4em 100% calc(100% - var(--split)) -0.3em);
   }
-  
-  .glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    cursor: default;
+}
+
+/* A note on the accent, set under it. */
+.say {
+  margin-top: clamp(1rem, 2.4cqi, 2rem);
+  font-size: 0.9375rem;
+  color: var(--muted);
+  animation: fade 0.5s 0.7s both;
+}
+.say em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
   }
-  
-  .glass-hover:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+}
+
+.lead {
+  margin-top: var(--lead-gap);
+  font-size: var(--lead-size);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  max-width: 27em;
+  text-wrap: balance;
+}
+
+.hero__facts {
+  margin-top: 2.5rem;
+}
+
+/* ------------------------------------------------------------------ facts */
+
+.facts {
+  container-type: inline-size;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+.facts > div {
+  display: grid;
+  grid-template-columns: minmax(0, 6rem) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0 0.75rem;
+  padding-block: 0.7rem;
+  border-top: 1px solid var(--line);
+}
+.facts > div:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.facts dt {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.facts dd {
+  overflow-wrap: anywhere;
+}
+.facts time,
+.facts__sub {
+  display: block;
+  color: var(--muted);
+}
+
+/* In a narrow column the label goes above its value. */
+@container (max-width: 15rem) {
+  .facts > div {
+    grid-template-columns: minmax(0, 1fr);
   }
-  
-  /* Apple-inspired subtle glow effects */
-  .subtle-glow-blue {
-    text-shadow: 0 0 20px rgba(100, 181, 246, 0.3);
+  .facts dt {
+    margin-bottom: 0.15rem;
   }
-  
-  .subtle-glow-purple {
-    text-shadow: 0 0 20px rgba(186, 104, 200, 0.3);
+}
+
+/* --------------------------------------------------------------- sections */
+
+.section {
+  display: grid;
+  gap: 2rem var(--gap);
+  padding-top: 1.125rem;
+  padding-bottom: clamp(4.5rem, 10vw, 9rem);
+  border-top: 1px solid var(--ink);
+}
+
+.section__head h2 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.section__head p {
+  margin-top: 0.5rem;
+  max-width: 22em;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+
+.section__body {
+  min-width: 0;
+  container-type: inline-size;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  padding-block: 0.25rem;
+  font-weight: 600;
+  text-decoration-color: var(--ink);
+}
+.link-arrow svg {
+  width: 0.9em;
+  height: 0.9em;
+  transition: translate 0.3s var(--ease);
+}
+.link-arrow:hover svg {
+  translate: 0.15em -0.15em;
+}
+
+/* ---------------------------------------------------------------- feature */
+
+.feature__shot {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #0b0b0c;
+}
+/* A hairline frame drawn over the image, so it never shifts the layout and
+   the outline stays free for keyboard focus. */
+.feature__shot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  pointer-events: none;
+}
+.feature__shot img {
+  width: 100%;
+  height: auto;
+  transition: scale 0.9s var(--ease);
+}
+.feature__shot:hover img {
+  scale: 1.02;
+}
+
+.feature__text {
+  --title-size: clamp(1.75rem, 1.3rem + 1.6cqi, 2.5rem);
+  display: grid;
+  gap: 1.75rem var(--gap);
+  margin-top: 1.5rem;
+}
+.feature__text > *,
+.about > * {
+  min-width: 0;
+}
+
+.feature__intro h3 {
+  font-size: var(--title-size);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin-left: var(--bearing);
+}
+.feature__intro p {
+  margin-top: 0.875rem;
+  max-width: 33em;
+  text-wrap: pretty;
+}
+.feature__intro .links {
+  margin-top: 1rem;
+}
+
+/* ------------------------------------------------------------------- rows */
+
+.rows {
+  margin-top: clamp(3rem, 6cqi, 4.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  gap: 0.375rem var(--gap);
+  align-items: baseline;
+  padding-block: 1.125rem;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+
+.row__name {
+  font-size: 1.375rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.row__desc {
+  max-width: 34em;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--muted);
+  text-wrap: pretty;
+  transition: color 0.25s;
+}
+.row__end {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.row__year {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+}
+.row__arrow,
+.years__arrow {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--muted);
+  transition:
+    translate 0.4s var(--ease),
+    color 0.25s;
+}
+.row__arrow {
+  align-self: center;
+}
+
+.row:hover .row__desc,
+.row:focus-visible .row__desc {
+  color: var(--ink);
+}
+.row:hover .row__arrow,
+.row:focus-visible .row__arrow,
+.years a:hover .years__arrow,
+.years a:focus-visible .years__arrow {
+  color: var(--ink);
+  translate: 0.15rem -0.15rem;
+}
+
+/* ------------------------------------------------------------------ years */
+
+.years {
+  display: grid;
+  border-bottom: 1px solid var(--line);
+}
+.years a {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  gap: 0 0.75rem;
+  padding-block: 0.875rem;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+}
+.years__year {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.years__arrow {
+  order: 3;
+  align-self: center;
+}
+.years__lang {
+  --lh: 1;
+  font-size: clamp(1.75rem, 1rem + 4cqi, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+/* ------------------------------------------------------------------ about */
+
+.about {
+  display: grid;
+  gap: 2.5rem var(--gap);
+}
+
+.prose {
+  max-width: 34em;
+  font-size: clamp(1.125rem, 1rem + 0.6cqi, 1.3125rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+}
+.prose p + p {
+  margin-top: 1em;
+}
+
+/* ---------------------------------------------------------------- contact */
+
+.email {
+  display: inline-block;
+  /* Two lines on small screens. "matijamaric.com" inks 7.72em. */
+  font-size: calc(100cqi / 7.74);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  margin-left: -0.031em;
+  padding-bottom: 0.14em;
+  text-decoration: none;
+  background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0 0.06em;
+  transition: background-size 0.6s var(--ease);
+}
+.email span {
+  display: block;
+}
+.email span + span {
+  margin-left: -0.031em;
+}
+.email:hover,
+.email:focus-visible {
+  background-size: 100% 0.06em;
+}
+
+@container (min-width: 34rem) {
+  .email {
+    /* One line: the whole address inks 12.16em. */
+    font-size: calc(100cqi / 12.18);
   }
-  
-  .subtle-glow-cyan {
-    text-shadow: 0 0 20px rgba(77, 208, 225, 0.3);
+  .email span {
+    display: inline;
   }
-  
-  /* Apple HIG button styles */
-  .apple-button {
-    background: rgba(100, 181, 246, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1.5px solid rgba(100, 181, 246, 0.3);
-    box-shadow: 0 4px 16px rgba(100, 181, 246, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .email span + span {
+    margin-left: 0;
   }
-  
-  .apple-button:hover {
-    background: rgba(100, 181, 246, 0.25);
-    border-color: rgba(100, 181, 246, 0.5);
-    box-shadow: 0 8px 24px rgba(100, 181, 246, 0.3);
-    transform: translateY(-1px);
+}
+
+.contact .links {
+  margin-top: clamp(1.25rem, 3.5cqi, 2.25rem);
+}
+
+.link-copy {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+.link-copy[hidden] {
+  display: none;
+}
+.link-copy:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ----------------------------------------------------------------- footer */
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 2rem;
+  padding-block: 1rem 1.75rem;
+  border-top: 1px solid var(--ink);
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+.site-footer p:last-child {
+  display: flex;
+  gap: 1.25rem;
+}
+.site-footer a {
+  display: inline-block;
+  padding-block: 0.25rem;
+}
+
+/* ---------------------------------------------------------------- tablet+ */
+
+@media (min-width: 40rem) {
+  .name {
+    /* Both words on one line ink 5.752em, so this fills the measure. */
+    font-size: calc(100cqi / 5.76);
+    white-space: nowrap;
   }
-  
-  /* Smooth transitions per Apple HIG */
-  .smooth-transition {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  .name__line {
+    display: inline-block;
+    vertical-align: top;
   }
+  .name__line + .name__line {
+    margin-top: -0.2em;
+  }
+
+  .say {
+    text-align: right;
+  }
+
+  .years {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    border-bottom: 0;
+  }
+  .years a {
+    grid-template-columns: 1fr auto;
+    align-content: space-between;
+    row-gap: clamp(2rem, 7cqi, 4.5rem);
+    height: 100%;
+    padding: 0 0.75rem 0.25rem 0;
+    border-top: 0;
+  }
+  .years li + li a {
+    padding-left: 0.875rem;
+    border-left: 1px solid var(--line);
+  }
+  .years__arrow {
+    order: 0;
+  }
+  .years__lang {
+    grid-column: 1 / -1;
+    margin-left: var(--bearing);
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    grid-template-areas:
+      'name desc'
+      'name end';
+  }
+  .row__name {
+    grid-area: name;
+  }
+  .row__desc {
+    grid-area: desc;
+  }
+  .row__end {
+    grid-area: end;
+  }
+}
+
+/* --------------------------------------------------------------- desktop */
+
+/* Twelve columns. Section labels take the first three, content the rest. */
+@media (min-width: 56rem) {
+  .hero__grid,
+  .section {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gap);
+  }
+
+  .name,
+  .say {
+    grid-column: 1 / -1;
+  }
+  .lead {
+    grid-column: 4 / -1;
+    grid-row: 3;
+  }
+  .hero__facts {
+    grid-column: 1 / span 3;
+    grid-row: 3;
+    align-self: start;
+    /* Top rule level with the cap height of the lead's first line. */
+    margin-top: calc(var(--lead-gap) + 0.266 * var(--lead-size));
+  }
+
+  .section__head {
+    grid-column: 1 / span 3;
+    position: sticky;
+    top: 1.125rem;
+    align-self: start;
+  }
+  .section__head > * {
+    padding-right: 1rem;
+  }
+  .section__body {
+    grid-column: 4 / -1;
+  }
+
+  /*
+    Side by side, a label and its content start on one line: the cap height
+    of the label, 1.125rem under the section rule. Each of these pulls its
+    first line of text up by the space above its capitals.
+  */
+  .section__head h2 {
+    margin-top: -0.256em;
+  }
+  .years {
+    margin-top: -0.285rem;
+  }
+  .prose {
+    margin-top: -0.381em;
+  }
+  .email {
+    margin-top: -0.131em;
+  }
+}
+
+/* Wide enough to split the content column into thirds that sit on the
+   same twelve columns: titles, text, details. */
+@media (min-width: 72rem) {
+  .feature__text,
+  .about,
+  .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: none;
+    align-items: start;
+  }
+  .feature__intro,
+  .prose {
+    grid-column: span 2;
+  }
+  /* Top rule level with the title's cap height. */
+  .feature__text .facts {
+    margin-top: calc(0.156 * var(--title-size));
+  }
+
+  .row {
+    align-items: baseline;
+  }
+  .row__name,
+  .row__desc,
+  .row__end {
+    grid-area: auto;
+  }
+  .row__end {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 26rem) {
+  .locale {
+    display: none;
+  }
+  .site-nav {
+    margin-right: auto;
+  }
+}
+
+/* ----------------------------------------------------------- theme switch */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* ----------------------------------------------------------------- motion */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ------------------------------------------------------------------ print */
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+  .site-header,
+  .skip,
+  .link-copy,
+  .site-footer p:last-child {
+    display: none;
+  }
+  .section {
+    break-inside: avoid;
+    padding-bottom: 2rem;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+}
+
+/* -------------------------------------------------------------------- 404 */
+
+.lost__main {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 2rem;
+  min-height: 100svh;
+  padding-block: 3rem;
+}
+.lost__code {
+  font-size: min(40vw, 22rem);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.045em;
+  margin-left: -0.016em;
+}
+.lost__zero {
+  position: relative;
+  display: inline-block;
+}
+/* An accent over the zero, set where the font would put one over a capital. */
+.lost__zero .tick {
+  position: absolute;
+  left: 0.2em;
+  top: -0.215em;
+}
+.lost__text {
+  max-width: 22em;
+  font-size: clamp(1.375rem, 1rem + 1.6vw, 2rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+}
+.lost__back {
+  font-weight: 600;
+  text-decoration-color: var(--ink);
 }
