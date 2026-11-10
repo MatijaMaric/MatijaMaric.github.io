@@ -20,6 +20,18 @@
 @font-face {
   font-family: 'Schibsted Fallback';
   src: local('Arial'), local('Helvetica Neue'), local('Liberation Sans');
+  font-weight: 400 600;
+  size-adjust: 104%;
+  ascent-override: 94%;
+  descent-override: 24.8%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: 'Schibsted Fallback';
+  src:
+    local('Arial Bold'), local('Arial-BoldMT'), local('Helvetica Neue Bold'),
+    local('HelveticaNeue-Bold'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  font-weight: 700 900;
   size-adjust: 104%;
   ascent-override: 94%;
   descent-override: 24.8%;
@@ -182,8 +194,9 @@ button {
 
 .site-header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 1.25rem;
+  gap: 0 1.25rem;
   padding-block: 1.25rem;
   font-size: 0.9375rem;
 }
@@ -358,7 +371,7 @@ button {
 }
 .facts > div {
   display: grid;
-  grid-template-columns: 6rem 1fr;
+  grid-template-columns: minmax(0, 6rem) minmax(0, 1fr);
   gap: 0.75rem;
   padding-block: 0.7rem;
   border-top: 1px solid var(--line);
@@ -371,6 +384,9 @@ button {
   font-size: 0.75rem;
   line-height: 1.75;
   color: var(--muted);
+}
+.facts dd {
+  overflow-wrap: anywhere;
 }
 .facts time,
 .facts__sub {
@@ -449,6 +465,11 @@ button {
 }
 .feature__shot:hover img {
   scale: 1.02;
+}
+
+.feature__text > *,
+.about > * {
+  min-width: 0;
 }
 
 .feature__text {
