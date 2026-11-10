@@ -664,12 +664,12 @@ a:focus-visible .accented .tick {
 
 .email {
   display: inline-block;
-  /* Two lines on small screens. "matijamaric.com" inks 7.72em. */
-  font-size: calc(100cqi / 7.74);
+  /* Two lines on small screens. "thematijamaric@" inks 7.95em. */
+  font-size: calc(100cqi / 7.97);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.045em;
-  margin-left: -0.031em;
+  margin-left: -0.019em;
   padding-bottom: 0.14em;
   text-decoration: none;
   background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0 0.06em;
@@ -678,9 +678,6 @@ a:focus-visible .accented .tick {
 .email span {
   display: block;
 }
-.email span + span {
-  margin-left: -0.031em;
-}
 .email:hover,
 .email:focus-visible {
   background-size: 100% 0.06em;
@@ -688,14 +685,11 @@ a:focus-visible .accented .tick {
 
 @container (min-width: 34rem) {
   .email {
-    /* One line: the whole address inks 12.16em. */
-    font-size: calc(100cqi / 12.18);
+    /* One line: the whole address inks 12.70em. */
+    font-size: calc(100cqi / 12.71);
   }
   .email span {
     display: inline;
-  }
-  .email span + span {
-    margin-left: 0;
   }
 }
 
