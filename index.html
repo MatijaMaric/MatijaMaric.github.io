@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matija Marić — Software engineer in Zagreb</title>
+    <meta
+      name="description"
+      content="Matija Marić is a software engineer in Zagreb, Croatia. He works at SysKit and builds self-hosted software like Remindarr on the side."
+    />
+    <meta name="author" content="Matija Marić" />
+    <link rel="canonical" href="https://www.matijamaric.com/" />
+
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f3f3f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Matija Marić" />
+    <meta property="og:title" content="Matija Marić — Software engineer in Zagreb" />
+    <meta
+      property="og:description"
+      content="Software engineer at SysKit. Builds self-hosted software like Remindarr on the side."
+    />
+    <meta property="og:url" content="https://www.matijamaric.com/" />
+    <meta property="og:image" content="https://www.matijamaric.com/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Matija Marić — Software engineer in Zagreb" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <link
+      rel="preload"
+      href="/assets/schibsted-grotesk-BPjsKwzK.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <script>
+      // Apply a saved theme before first paint so the page never flashes.
+      try {
+        var t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+      } catch (e) {}
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Matija Marić",
+        "url": "https://www.matijamaric.com/",
+        "image": "https://www.matijamaric.com/og.png",
+        "jobTitle": "Software engineer",
+        "worksFor": { "@type": "Organization", "name": "SysKit", "url": "https://www.syskit.com/" },
+        "address": { "@type": "PostalAddress", "addressLocality": "Zagreb", "addressCountry": "HR" },
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Zagreb, Faculty of Electrical Engineering and Computing"
+        },
+        "knowsLanguage": ["hr", "en"],
+        "email": "mailto:thematijamaric@gmail.com",
+        "sameAs": ["https://github.com/MatijaMaric", "https://www.linkedin.com/in/matija-maric/"]
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/main-VHrlK4sv.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/style-DraZU6Z9.css">
+  </head>
+
+  <body>
+    <svg class="sprite" aria-hidden="true" focusable="false">
+      <symbol id="i-arrow" viewBox="0 0 16 16">
+        <path d="M4.5 11.5 11.5 4.5M5.5 4.5h6v6" fill="none" stroke="currentColor" stroke-width="1.5" />
+      </symbol>
+      <symbol id="i-acute" viewBox="0 0 464 521">
+        <path d="M177.7 520.5 0 420.5 190.7 0l273 174.1z" fill="currentColor" />
+      </symbol>
+      <symbol id="i-theme" viewBox="0 0 16 16">
+        <circle cx="8" cy="8" r="6.25" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <path d="M8 1.75a6.25 6.25 0 0 1 0 12.5z" fill="currentColor" />
+      </symbol>
+    </svg>
+
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header wrap">
+      <p class="locale">
+        <span class="locale__place">Zagreb</span><span class="locale__sep" data-clock-sep hidden>, </span
+        ><time class="locale__time" data-clock hidden></time>
+      </p>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle hidden>
+        <svg width="16" height="16" aria-hidden="true"><use href="#i-theme" /></svg>
+        <span class="visually-hidden" data-theme-label>Switch to dark theme</span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section class="hero wrap" aria-labelledby="name">
+        <div class="hero__grid">
+        <h1 class="name" id="name">
+          <span class="name__line"><span class="name__word">Matija</span></span>
+          <span class="name__line"
+            ><span class="name__word"
+              >Mari<span class="c-acute"><span class="c-acute__c">ć</span></span></span
+            ></span
+          >
+        </h1>
+
+        <p class="say">
+          The <span lang="hr">ć</span> is a soft “ch”: <em>MAH-tee-ya MAH-rich</em>.
+        </p>
+
+        <p class="lead">
+          Software engineer in Zagreb. I work at SysKit on tools that keep Microsoft&nbsp;365
+          environments in order. In my spare time I write self-hosted software, mostly because I
+          wanted it to exist.
+        </p>
+
+        <dl class="facts hero__facts">
+          <div>
+            <dt>Lately</dt>
+            <dd data-lately>
+              Building <a href="https://github.com/MatijaMaric/remindarr" rel="noopener">Remindarr</a>
+              <span class="facts__sub">a media tracker</span>
+            </dd>
+          </div>
+          <div>
+            <dt>Elsewhere</dt>
+            <dd>
+              <a href="https://github.com/MatijaMaric" rel="me noopener">GitHub</a>,
+              <a href="https://www.linkedin.com/in/matija-maric/" rel="me noopener">LinkedIn</a>
+            </dd>
+          </div>
+        </dl>
+        </div>
+      </section>
+
+      <section class="section wrap" id="work" aria-labelledby="work-title">
+        <header class="section__head">
+          <h2 id="work-title">Work</h2>
+          <p>Side projects, all open source.</p>
+        </header>
+
+        <div class="section__body">
+          <article class="feature">
+            <a
+              class="feature__shot"
+              href="https://remindarr.app/"
+              rel="noopener"
+              aria-label="Remindarr, live at remindarr.app"
+            >
+              <picture>
+                <source
+                  media="(max-width: 639px)"
+                  type="image/avif"
+                  srcset="/images/remindarr-home-crop-640.avif 640w, /images/remindarr-home-crop-1024.avif 1024w"
+                  sizes="92vw"
+                  width="1024"
+                  height="819"
+                />
+                <source
+                  media="(max-width: 639px)"
+                  type="image/webp"
+                  srcset="/images/remindarr-home-crop-640.webp 640w, /images/remindarr-home-crop-1024.webp 1024w"
+                  sizes="92vw"
+                  width="1024"
+                  height="819"
+                />
+                <source
+                  type="image/avif"
+                  srcset="/images/remindarr-home-800.avif 800w, /images/remindarr-home-1280.avif 1280w, /images/remindarr-home-1920.avif 1920w"
+                  sizes="(min-width: 1456px) 1010px, (min-width: 900px) 70vw, 92vw"
+                />
+                <source
+                  type="image/webp"
+                  srcset="/images/remindarr-home-800.webp 800w, /images/remindarr-home-1280.webp 1280w, /images/remindarr-home-1920.webp 1920w"
+                  sizes="(min-width: 1456px) 1010px, (min-width: 900px) 70vw, 92vw"
+                />
+                <img
+                  src="/images/remindarr-home-1280.jpg"
+                  width="1920"
+                  height="1080"
+                  alt="Remindarr’s home screen: a row of shows in progress, each with its next episode and a Mark Watched button."
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </a>
+
+            <div class="feature__text">
+              <div class="feature__intro">
+                <h3>Remindarr</h3>
+                <p>
+                  A self-hosted tracker for films and series. Pick your streaming services, follow
+                  what you care about, and it tells you the day something lands, by Discord, Telegram,
+                  ntfy or browser push.
+                </p>
+                <p class="links">
+                  <a class="link-arrow" href="https://remindarr.app/" rel="noopener"
+                    >remindarr.app<svg aria-hidden="true"><use href="#i-arrow" /></svg
+                  ></a>
+                  <a class="link-arrow" href="https://github.com/MatijaMaric/remindarr" rel="noopener"
+                    >Source<svg aria-hidden="true"><use href="#i-arrow" /></svg
+                  ></a>
+                </p>
+              </div>
+              <dl class="facts facts--compact">
+                <div>
+                  <dt>Year</dt>
+                  <dd>2026, ongoing</dd>
+                </div>
+                <div>
+                  <dt>Stack</dt>
+                  <dd>TypeScript, Bun, Hono, React, SQLite</dd>
+                </div>
+                <div>
+                  <dt>Runs on</dt>
+                  <dd>Docker, or Cloudflare Workers with D1</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <ul class="rows">
+            <li>
+              <a class="row" href="https://github.com/MatijaMaric/hass-vibedash" rel="noopener">
+                <h3 class="row__name">
+                  <span class="accented"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>VibeDash</span
+                  >
+                </h3>
+                <p class="row__desc">
+                  Describe a dashboard and Home Assistant builds it. An LLM picks the entities and
+                  lays out live charts and gauges.
+                </p>
+                <p class="row__end">
+                  <span class="row__meta">Python, TypeScript</span>
+                  <span class="row__year">2026</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
+              </a>
+            </li>
+            <li>
+              <a class="row" href="https://github.com/MatijaMaric/WakeOnLan" rel="noopener">
+                <h3 class="row__name">
+                  <span class="accented"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Wake on LAN</span
+                  >
+                </h3>
+                <p class="row__desc">
+                  A command-line tool that sends a magic packet to wake a machine on the local
+                  network.
+                </p>
+                <p class="row__end">
+                  <span class="row__meta">C#, .NET</span>
+                  <span class="row__year">2023</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
+              </a>
+            </li>
+            <li>
+              <a class="row" href="https://github.com/MatijaMaric/speedlog" rel="noopener">
+                <h3 class="row__name">
+                  <span class="accented accented--x"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>speedlog</span
+                  >
+                </h3>
+                <p class="row__desc">
+                  Runs a speed test on a timer and logs ping, download and upload to a CSV.
+                </p>
+                <p class="row__end">
+                  <span class="row__meta">JavaScript, Node.js</span>
+                  <span class="row__year">2019</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section wrap" id="advent" aria-labelledby="advent-title">
+        <header class="section__head">
+          <h2 id="advent-title">Advent of Code</h2>
+          <p>
+            2017 to 2021. Twenty-five puzzles every December, usually in a language I wanted to
+            try.
+          </p>
+        </header>
+
+        <div class="section__body">
+          <ol class="years">
+            <li>
+              <a href="https://github.com/MatijaMaric/adventofcode-2017" rel="noopener">
+                <span class="years__year">2017</span>
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
+                  ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Python</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/MatijaMaric/adventofcode-2018" rel="noopener">
+                <span class="years__year">2018</span>
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
+                  ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Rust</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/MatijaMaric/aoc-2019" rel="noopener">
+                <span class="years__year">2019</span>
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
+                  ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Go</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/MatijaMaric/aoc-2020" rel="noopener">
+                <span class="years__year">2020</span>
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
+                  ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Go</span
+                >
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/MatijaMaric/aoc-2021" rel="noopener">
+                <span class="years__year">2021</span>
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
+                  ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>C#</span
+                >
+              </a>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section wrap" id="about" aria-labelledby="about-title">
+        <header class="section__head">
+          <h2 id="about-title">About</h2>
+        </header>
+
+        <div class="section__body">
+          <div class="about">
+          <div class="prose">
+            <p>
+              My bachelor’s thesis tracked football players across video frames with OpenCV. That
+              was at FER, the University of Zagreb’s Faculty of Electrical Engineering and
+              Computing, where I studied computing and leaned towards machine learning and computer
+              vision.
+            </p>
+            <p>
+              At work it’s C# on the server and TypeScript in the browser. On my own projects I use
+              whatever suits the job.
+            </p>
+            <p>
+              Outside of work it’s films and series, which is where Remindarr came from, plus games
+              and music.
+            </p>
+          </div>
+
+          <dl class="facts">
+            <div>
+              <dt>Daily</dt>
+              <dd>C#, .NET, TypeScript, React, SQL</dd>
+            </div>
+            <div>
+              <dt>On the side</dt>
+              <dd>Bun, Hono, SQLite, Cloudflare Workers, Docker, Home Assistant</dd>
+            </div>
+            <div>
+              <dt>Speaks</dt>
+              <dd>Croatian, English</dd>
+            </div>
+          </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="section wrap" id="contact" aria-labelledby="contact-title">
+        <header class="section__head">
+          <h2 id="contact-title">Contact</h2>
+          <p>Email is the quickest way to reach me.</p>
+        </header>
+
+        <div class="section__body contact">
+          <a class="email" href="mailto:thematijamaric@gmail.com"
+            ><span>thematijamaric@</span><span>gmail.com</span></a
+          >
+          <p class="links">
+            <button class="link-arrow link-copy" type="button" data-copy="thematijamaric@gmail.com" hidden>
+              <span data-copy-label aria-live="polite">Copy address</span>
+            </button>
+            <a class="link-arrow" href="https://github.com/MatijaMaric" rel="me noopener"
+              >GitHub<svg aria-hidden="true"><use href="#i-arrow" /></svg
+            ></a>
+            <a class="link-arrow" href="https://www.linkedin.com/in/matija-maric/" rel="me noopener"
+              >LinkedIn<svg aria-hidden="true"><use href="#i-arrow" /></svg
+            ></a>
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer wrap">
+      <p>© <span data-year>2026</span> Matija Marić</p>
+      <p>Set in Schibsted Grotesk and JetBrains Mono.</p>
+      <p>
+        <a href="https://github.com/MatijaMaric/MatijaMaric.github.io" rel="noopener">Source</a>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+
+  </body>
+</html>
