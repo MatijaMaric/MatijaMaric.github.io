@@ -370,6 +370,7 @@ a:focus-visible .accented .tick {
   font-style: normal;
   font-weight: 600;
   color: var(--ink);
+  white-space: nowrap;
 }
 
 @keyframes fade {

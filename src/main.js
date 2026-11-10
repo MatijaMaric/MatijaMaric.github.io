@@ -57,16 +57,20 @@ toggle.addEventListener('click', () => {
   const y = box.top + box.height / 2
   const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
-  document.startViewTransition(() => setTheme(next)).ready.then(() => {
-    root.animate(
-      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-      {
-        duration: 550,
-        easing: 'cubic-bezier(0.3, 0, 0.2, 1)',
-        pseudoElement: '::view-transition-new(root)',
-      },
-    )
-  })
+  document
+    .startViewTransition(() => setTheme(next))
+    .ready.then(() => {
+      root.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        {
+          duration: 550,
+          easing: 'cubic-bezier(0.3, 0, 0.2, 1)',
+          pseudoElement: '::view-transition-new(root)',
+        },
+      )
+    })
+    // A skipped transition still switches the theme; nothing to recover.
+    .catch(() => {})
 })
 
 /* ------------------------------------------------------------------ clock */
