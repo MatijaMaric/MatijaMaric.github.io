@@ -45,6 +45,10 @@ npm run preview
   letter-spacing changes, those divisors need measuring again.
 - **The red accent on the ć is the same glyph drawn twice**, once in ink with the accent clipped
   off and once in red with the letter clipped off. `--split` on `.c-acute` is where the cut falls.
+- **The accent is the only graphic mark.** Hovering a project or a year puts one over its first
+  letter (`.accented`). Titles that start with a lowercase letter take `.accented--x`.
+- **Layout is twelve columns from 56rem up**: section labels in the first three, content in the
+  other nine, and from 72rem the content splits into thirds on the same columns.
 - **The fonts are subsets.** They cover Basic Latin, Latin-1, Croatian letters and a few arrows and
   dashes. A character outside that set falls back to the system font; re-subset from the upstream
   files with `pyftsubset` to add more.

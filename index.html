@@ -12,8 +12,8 @@
     <link rel="canonical" href="https://www.matijamaric.com/" />
 
     <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0f0f0e" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f3f3f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Matija Marić" />
@@ -117,25 +117,16 @@
         </h1>
 
         <p class="say">
-          <svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>
-          <span>The <span lang="hr">ć</span> is a soft “ch”: <em>MAH-tee-ya MAH-rich</em>.</span>
+          The <span lang="hr">ć</span> is a soft “ch”: <em>MAH-tee-ya MAH-rich</em>.
         </p>
 
         <p class="lead">
-          Software engineer in Zagreb. By day I’m at SysKit, building tools that keep
-          Microsoft&nbsp;365 environments in order. After hours I write self-hosted software,
-          mostly because I wanted it to exist.
+          Software engineer in Zagreb. I work at SysKit on tools that keep Microsoft&nbsp;365
+          environments in order. In my spare time I write self-hosted software, mostly because I
+          wanted it to exist.
         </p>
 
         <dl class="facts hero__facts">
-          <div>
-            <dt>Now</dt>
-            <dd>Software engineer at <a href="https://www.syskit.com/" rel="noopener">SysKit</a></dd>
-          </div>
-          <div>
-            <dt>Based</dt>
-            <dd>Zagreb, Croatia</dd>
-          </div>
           <div>
             <dt>Lately</dt>
             <dd data-lately>
@@ -170,6 +161,22 @@
             >
               <picture>
                 <source
+                  media="(max-width: 639px)"
+                  type="image/avif"
+                  srcset="/images/remindarr-crop-640.avif 640w, /images/remindarr-crop-1024.avif 1024w"
+                  sizes="92vw"
+                  width="1024"
+                  height="819"
+                />
+                <source
+                  media="(max-width: 639px)"
+                  type="image/webp"
+                  srcset="/images/remindarr-crop-640.webp 640w, /images/remindarr-crop-1024.webp 1024w"
+                  sizes="92vw"
+                  width="1024"
+                  height="819"
+                />
+                <source
                   type="image/avif"
                   srcset="
                     /images/remindarr-800.avif   800w,
@@ -203,8 +210,8 @@
                 <h3>Remindarr</h3>
                 <p>
                   A self-hosted tracker for films and series. Pick your streaming services, follow
-                  what you care about, and it tells you the day something lands — over Discord,
-                  Telegram, ntfy or browser push.
+                  what you care about, and it tells you the day something lands, by Discord, Telegram,
+                  ntfy or browser push.
                 </p>
                 <p class="links">
                   <a class="link-arrow" href="https://remindarr.app/" rel="noopener"
@@ -236,43 +243,54 @@
             <li>
               <a class="row" href="https://github.com/MatijaMaric/hass-vibedash" rel="noopener">
                 <h3 class="row__name">
-                  <svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>VibeDash
+                  <span class="accented"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>VibeDash</span
+                  >
                 </h3>
                 <p class="row__desc">
-                  Dashboards for Home Assistant, built by describing them. An LLM picks the right
-                  entities, then lays out live charts, gauges and metrics.
+                  Describe a dashboard and Home Assistant builds it. An LLM picks the entities and
+                  lays out live charts and gauges.
                 </p>
-                <p class="row__meta">Python, TypeScript</p>
-                <p class="row__year">2026</p>
-                <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <p class="row__end">
+                  <span class="row__meta">Python, TypeScript</span>
+                  <span class="row__year">2026</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
               </a>
             </li>
             <li>
               <a class="row" href="https://github.com/MatijaMaric/WakeOnLan" rel="noopener">
                 <h3 class="row__name">
-                  <svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Wake on LAN
+                  <span class="accented"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Wake on LAN</span
+                  >
                 </h3>
                 <p class="row__desc">
-                  A small command-line tool that broadcasts a magic packet to wake a machine on the
-                  local network.
+                  A command-line tool that sends a magic packet to wake a machine on the local
+                  network.
                 </p>
-                <p class="row__meta">C#, .NET</p>
-                <p class="row__year">2023</p>
-                <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <p class="row__end">
+                  <span class="row__meta">C#, .NET</span>
+                  <span class="row__year">2023</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
               </a>
             </li>
             <li>
               <a class="row" href="https://github.com/MatijaMaric/speedlog" rel="noopener">
                 <h3 class="row__name">
-                  <svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>speedlog
+                  <span class="accented accented--x"
+                    ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>speedlog</span
+                  >
                 </h3>
                 <p class="row__desc">
-                  Runs an internet speed test on a timer and appends ping, download and upload to a
-                  CSV.
+                  Runs a speed test on a timer and logs ping, download and upload to a CSV.
                 </p>
-                <p class="row__meta">JavaScript, Node.js</p>
-                <p class="row__year">2019</p>
-                <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <p class="row__end">
+                  <span class="row__meta">JavaScript, Node.js</span>
+                  <span class="row__year">2019</span>
+                  <svg class="row__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                </p>
               </a>
             </li>
           </ul>
@@ -283,8 +301,8 @@
         <header class="section__head">
           <h2 id="advent-title">Advent of Code</h2>
           <p>
-            Twenty-five puzzles every December. Most years they’re my excuse to write something
-            other than the day job’s language.
+            2017 to 2021. Twenty-five puzzles every December, usually in a language I wanted to
+            try.
           </p>
         </header>
 
@@ -293,7 +311,8 @@
             <li>
               <a href="https://github.com/MatijaMaric/adventofcode-2017" rel="noopener">
                 <span class="years__year">2017</span>
-                <span class="years__lang"
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
                   ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Python</span
                 >
               </a>
@@ -301,7 +320,8 @@
             <li>
               <a href="https://github.com/MatijaMaric/adventofcode-2018" rel="noopener">
                 <span class="years__year">2018</span>
-                <span class="years__lang"
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
                   ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Rust</span
                 >
               </a>
@@ -309,7 +329,8 @@
             <li>
               <a href="https://github.com/MatijaMaric/aoc-2019" rel="noopener">
                 <span class="years__year">2019</span>
-                <span class="years__lang"
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
                   ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Go</span
                 >
               </a>
@@ -317,7 +338,8 @@
             <li>
               <a href="https://github.com/MatijaMaric/aoc-2020" rel="noopener">
                 <span class="years__year">2020</span>
-                <span class="years__lang"
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
                   ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>Go</span
                 >
               </a>
@@ -325,7 +347,8 @@
             <li>
               <a href="https://github.com/MatijaMaric/aoc-2021" rel="noopener">
                 <span class="years__year">2021</span>
-                <span class="years__lang"
+                <svg class="years__arrow" aria-hidden="true"><use href="#i-arrow" /></svg>
+                <span class="years__lang accented"
                   ><svg class="tick" aria-hidden="true"><use href="#i-acute" /></svg>C#</span
                 >
               </a>
@@ -339,19 +362,23 @@
           <h2 id="about-title">About</h2>
         </header>
 
-        <div class="section__body about">
+        <div class="section__body">
+          <div class="about">
           <div class="prose">
             <p>
-              I studied computing at FER, the University of Zagreb’s Faculty of Electrical
-              Engineering and Computing, and drifted towards machine learning and computer vision.
-              My bachelor’s thesis tracked football players across video frames with OpenCV.
+              My bachelor’s thesis tracked football players across video frames with OpenCV. That
+              was at FER, the University of Zagreb’s Faculty of Electrical Engineering and
+              Computing, where I studied computing and leaned towards machine learning and computer
+              vision.
             </p>
             <p>
-              These days I build product software, which day to day means C# on the server and
-              TypeScript in the browser. On my own time I reach for whatever fits the problem;
-              lately that has been Bun, SQLite and Cloudflare Workers.
+              At work it’s C# on the server and TypeScript in the browser. On my own projects I use
+              whatever suits the job.
             </p>
-            <p>Away from the keyboard it’s films and series (hence Remindarr), games and music.</p>
+            <p>
+              Outside of work it’s films and series, which is where Remindarr came from, plus games
+              and music.
+            </p>
           </div>
 
           <dl class="facts">
@@ -364,21 +391,18 @@
               <dd>Bun, Hono, SQLite, Cloudflare Workers, Docker, Home Assistant</dd>
             </div>
             <div>
-              <dt>For puzzles</dt>
-              <dd>Python, Rust, Go</dd>
-            </div>
-            <div>
               <dt>Speaks</dt>
               <dd>Croatian, English</dd>
             </div>
           </dl>
+          </div>
         </div>
       </section>
 
       <section class="section wrap" id="contact" aria-labelledby="contact-title">
         <header class="section__head">
           <h2 id="contact-title">Contact</h2>
-          <p>For work, a project, or a film recommendation.</p>
+          <p>Email is the quickest way to reach me.</p>
         </header>
 
         <div class="section__body contact">
@@ -387,7 +411,7 @@
           >
           <p class="links">
             <button class="link-arrow link-copy" type="button" data-copy="contact@matijamaric.com" hidden>
-              <span data-copy-label>Copy address</span>
+              <span data-copy-label aria-live="polite">Copy address</span>
             </button>
             <a class="link-arrow" href="https://github.com/MatijaMaric" rel="me noopener"
               >GitHub<svg aria-hidden="true"><use href="#i-arrow" /></svg
@@ -402,10 +426,10 @@
 
     <footer class="site-footer wrap">
       <p>© <span data-year>2026</span> Matija Marić</p>
-      <p>Set in Schibsted Grotesk and JetBrains Mono. No cookies, no trackers.</p>
+      <p>Set in Schibsted Grotesk and JetBrains Mono.</p>
       <p>
         <a href="https://github.com/MatijaMaric/MatijaMaric.github.io" rel="noopener">Source</a>
-        <a href="#name">Back to top</a>
+        <a href="#">Back to top</a>
       </p>
     </footer>
 

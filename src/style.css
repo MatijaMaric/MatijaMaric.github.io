@@ -43,12 +43,12 @@
 :root {
   color-scheme: light dark;
 
-  --paper: light-dark(#f4f3ef, #0f0f0e);
-  --ink: light-dark(#131312, #edece7);
-  --muted: light-dark(#63625d, #a09f98);
-  --line: light-dark(rgb(19 19 18 / 0.16), rgb(237 236 231 / 0.18));
-  --wash: light-dark(rgb(19 19 18 / 0.045), rgb(237 236 231 / 0.06));
-  --accent: light-dark(#e03a1e, #ff5a3c);
+  --paper: light-dark(#f3f3f1, #0e0e0d);
+  --ink: light-dark(#111110, #ededea);
+  --muted: light-dark(#62625e, #a1a19b);
+  --line: light-dark(rgb(17 17 16 / 0.16), rgb(237 237 234 / 0.2));
+  --wash: light-dark(rgb(17 17 16 / 0.05), rgb(237 237 234 / 0.07));
+  --accent: light-dark(#e11d2e, #ff4a57);
 
   --sans: 'Schibsted Grotesk', 'Schibsted Fallback', ui-sans-serif, system-ui, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -56,6 +56,10 @@
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --gap: clamp(1rem, 2vw, 1.5rem);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Left side bearing of the heavy capitals. Pulling big type out by this
+     much puts its stems on the margin instead of just inside it. */
+  --bearing: -0.046em;
 }
 
 :root[data-theme='light'] {
@@ -182,12 +186,40 @@ button {
   transform: none;
 }
 
-/* The acute accent from the ć, reused as the site's one graphic mark. */
+/*
+  The acute accent from the ć is the site's one graphic mark, and it is only
+  ever used as an accent: hovering a title puts one over its first letter.
+  Sized and placed where the font itself would set an acute.
+*/
+.accented {
+  --lh: 1.2; /* the element's line-height, unitless */
+  --rise: 0.647; /* above a capital; .accented--x sits above a lowercase */
+  --tick-x: 0.2em;
+  position: relative;
+}
+.accented--x {
+  --rise: 0.471;
+  --tick-x: 0.13em;
+}
 .tick {
-  width: 0.46em;
-  height: 0.52em;
+  width: 0.226em;
+  height: 0.254em;
   color: var(--accent);
-  flex: none;
+}
+.accented .tick {
+  position: absolute;
+  left: var(--tick-x);
+  top: calc((var(--lh) / 2 - var(--rise)) * 1em);
+  opacity: 0;
+  translate: -0.12em 0.16em;
+  transition:
+    translate 0.35s var(--ease),
+    opacity 0.12s;
+}
+a:hover .accented .tick,
+a:focus-visible .accented .tick {
+  opacity: 1;
+  translate: 0 0;
 }
 
 /* ----------------------------------------------------------------- header */
@@ -257,16 +289,17 @@ button {
 
 .hero__grid {
   container-type: inline-size;
+  --lead-size: clamp(1.375rem, 0.95rem + 1.9cqi, 2.25rem);
+  --lead-gap: clamp(2.5rem, 6.5cqi, 5rem);
 }
 
 .name {
-  /* Stacked on small screens. The wider word, "Matija", inks 2.911em. */
-  font-size: calc(100cqi / 2.92);
+  /* Stacked on small screens. The wider word, "Matija", inks 2.883em. */
+  font-size: calc(100cqi / 2.89);
   font-weight: 800;
   line-height: 0.86;
   letter-spacing: -0.045em;
-  /* Pull the M's side bearing out so its stem sits on the margin. */
-  margin-left: -0.031em;
+  margin-left: var(--bearing);
 }
 
 .name__line {
@@ -277,27 +310,28 @@ button {
   margin: -0.2em -0.06em -0.24em;
 }
 .name__line + .name__line {
-  margin-top: -0.3em;
+  margin-top: -0.27em;
 }
 
 .name__word {
   display: inline-block;
-  animation: rise 0.9s var(--ease) both;
+  animation: rise 0.8s var(--ease) both;
 }
 .name__line + .name__line .name__word {
-  animation-delay: 0.07s;
+  animation-delay: 0.06s;
 }
 
 /*
   The ć is drawn twice: once in ink with its accent clipped away, and once in
   red with everything but the accent clipped away. The split sits in the gap
-  between the top of the c and the bottom of the accent.
+  between the top of the c and the bottom of the accent: 0.56em above the
+  baseline, which at this line-height is 0.23em below the top of the box.
 */
 .c-acute {
-  --split: 0.3em;
+  --split: 0.23em;
   position: relative;
   display: inline-block;
-  line-height: 1;
+  line-height: inherit;
 }
 .c-acute__c {
   display: inline-block;
@@ -310,7 +344,7 @@ button {
   inset: 0;
   color: var(--accent);
   clip-path: inset(-0.4em -0.3em calc(100% - var(--split)) -0.3em);
-  animation: strike 0.32s 0.72s cubic-bezier(0.5, 0, 0.2, 1) both;
+  animation: strike 0.3s 0.6s cubic-bezier(0.5, 0, 0.2, 1) both;
 }
 
 @keyframes rise {
@@ -325,23 +359,17 @@ button {
   }
 }
 
+/* A note on the accent, set under it. */
 .say {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5em;
-  margin-top: clamp(1.125rem, 2.6cqi, 2.25rem);
+  margin-top: clamp(1rem, 2.4cqi, 2rem);
   font-size: 0.9375rem;
   color: var(--muted);
-  animation: fade 0.6s 0.95s both;
+  animation: fade 0.5s 0.7s both;
 }
 .say em {
   font-style: normal;
   font-weight: 600;
   color: var(--ink);
-}
-.say .tick {
-  font-size: 1.5em;
-  translate: 0 0.04em;
 }
 
 @keyframes fade {
@@ -351,12 +379,12 @@ button {
 }
 
 .lead {
-  margin-top: clamp(2.75rem, 7cqi, 5.5rem);
-  font-size: clamp(1.375rem, 0.95rem + 1.9cqi, 2.25rem);
+  margin-top: var(--lead-gap);
+  font-size: var(--lead-size);
   line-height: 1.22;
   letter-spacing: -0.02em;
-  max-width: 26em;
-  text-wrap: pretty;
+  max-width: 27em;
+  text-wrap: balance;
 }
 
 .hero__facts {
@@ -366,13 +394,15 @@ button {
 /* ------------------------------------------------------------------ facts */
 
 .facts {
+  container-type: inline-size;
   font-size: 0.9375rem;
   line-height: 1.4;
 }
 .facts > div {
   display: grid;
   grid-template-columns: minmax(0, 6rem) minmax(0, 1fr);
-  gap: 0.75rem;
+  align-items: baseline;
+  gap: 0 0.75rem;
   padding-block: 0.7rem;
   border-top: 1px solid var(--line);
 }
@@ -382,7 +412,6 @@ button {
 .facts dt {
   font-family: var(--mono);
   font-size: 0.75rem;
-  line-height: 1.75;
   color: var(--muted);
 }
 .facts dd {
@@ -392,6 +421,16 @@ button {
 .facts__sub {
   display: block;
   color: var(--muted);
+}
+
+/* In a narrow column the label goes above its value. */
+@container (max-width: 15rem) {
+  .facts > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .facts dt {
+    margin-bottom: 0.15rem;
+  }
 }
 
 /* --------------------------------------------------------------- sections */
@@ -407,10 +446,11 @@ button {
 .section__head h2 {
   font-size: 1.0625rem;
   font-weight: 700;
+  line-height: 1.2;
   letter-spacing: -0.01em;
 }
 .section__head p {
-  margin-top: 0.375rem;
+  margin-top: 0.5rem;
   max-width: 22em;
   font-size: 0.9375rem;
   line-height: 1.4;
@@ -426,13 +466,14 @@ button {
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 1.5rem;
+  gap: 0.25rem 1.5rem;
 }
 
 .link-arrow {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
+  padding-block: 0.25rem;
   font-weight: 600;
   text-decoration-color: var(--ink);
 }
@@ -448,41 +489,46 @@ button {
 /* ---------------------------------------------------------------- feature */
 
 .feature__shot {
+  position: relative;
   display: block;
   overflow: hidden;
   background: #0b0b0c;
-  outline: 1px solid var(--line);
-  outline-offset: -1px;
+}
+/* A hairline frame drawn over the image, so it never shifts the layout and
+   the outline stays free for keyboard focus. */
+.feature__shot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  pointer-events: none;
 }
 .feature__shot img {
   width: 100%;
   height: auto;
-  /* On small screens, crop in on the interesting corner of the screenshot. */
-  aspect-ratio: 5 / 4;
-  object-fit: cover;
-  object-position: 26% 0;
   transition: scale 0.9s var(--ease);
 }
 .feature__shot:hover img {
   scale: 1.02;
 }
 
+.feature__text {
+  --title-size: clamp(1.75rem, 1.3rem + 1.6cqi, 2.5rem);
+  display: grid;
+  gap: 1.75rem var(--gap);
+  margin-top: 1.5rem;
+}
 .feature__text > *,
 .about > * {
   min-width: 0;
 }
 
-.feature__text {
-  display: grid;
-  gap: 1.75rem var(--gap);
-  margin-top: 1.5rem;
-}
-
 .feature__intro h3 {
-  font-size: clamp(1.75rem, 1.3rem + 1.6cqi, 2.5rem);
+  font-size: var(--title-size);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.035em;
+  margin-left: var(--bearing);
 }
 .feature__intro p {
   margin-top: 0.875rem;
@@ -490,7 +536,7 @@ button {
   text-wrap: pretty;
 }
 .feature__intro .links {
-  margin-top: 1.25rem;
+  margin-top: 1rem;
 }
 
 /* ------------------------------------------------------------------- rows */
@@ -502,40 +548,20 @@ button {
 
 .row {
   display: grid;
-  grid-template-columns: 1fr auto;
-  grid-template-areas:
-    'name year'
-    'desc desc'
-    'meta meta';
-  gap: 0.375rem 1rem;
+  gap: 0.375rem var(--gap);
   align-items: baseline;
   padding-block: 1.125rem;
   border-top: 1px solid var(--line);
   text-decoration: none;
-  transition: background-color 0.25s;
 }
 
 .row__name {
-  grid-area: name;
-  display: flex;
-  align-items: baseline;
   font-size: 1.375rem;
   font-weight: 700;
   line-height: 1.2;
   letter-spacing: -0.025em;
-  transition: translate 0.4s var(--ease);
-}
-.row__name .tick {
-  align-self: center;
-  width: 0;
-  opacity: 0;
-  transition:
-    width 0.4s var(--ease),
-    margin 0.4s var(--ease),
-    opacity 0.2s;
 }
 .row__desc {
-  grid-area: desc;
   max-width: 34em;
   font-size: 0.9375rem;
   line-height: 1.45;
@@ -543,40 +569,43 @@ button {
   text-wrap: pretty;
   transition: color 0.25s;
 }
-.row__meta,
-.row__year {
+.row__end {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--muted);
 }
-.row__meta {
-  grid-area: meta;
-  margin-top: 0.25rem;
-}
 .row__year {
-  grid-area: year;
+  margin-left: auto;
   font-variant-numeric: tabular-nums;
 }
+.row__arrow,
+.years__arrow {
+  flex: none;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--muted);
+  transition:
+    translate 0.4s var(--ease),
+    color 0.25s;
+}
 .row__arrow {
-  display: none;
-  width: 1rem;
-  height: 1rem;
-  transition: translate 0.4s var(--ease);
+  align-self: center;
 }
 
 .row:hover .row__desc,
 .row:focus-visible .row__desc {
   color: var(--ink);
 }
-.row:hover .row__name .tick,
-.row:focus-visible .row__name .tick {
-  width: 0.46em;
-  margin-right: 0.3em;
-  opacity: 1;
-}
 .row:hover .row__arrow,
-.row:focus-visible .row__arrow {
-  translate: 0.2rem -0.2rem;
+.row:focus-visible .row__arrow,
+.years a:hover .years__arrow,
+.years a:focus-visible .years__arrow {
+  color: var(--ink);
+  translate: 0.15rem -0.15rem;
 }
 
 /* ------------------------------------------------------------------ years */
@@ -586,10 +615,10 @@ button {
   border-bottom: 1px solid var(--line);
 }
 .years a {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0 0.75rem;
   padding-block: 0.875rem;
   border-top: 1px solid var(--line);
   text-decoration: none;
@@ -600,28 +629,16 @@ button {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+.years__arrow {
+  order: 3;
+  align-self: center;
+}
 .years__lang {
-  position: relative;
+  --lh: 1;
   font-size: clamp(1.75rem, 1rem + 4cqi, 3.25rem);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
-}
-.years__lang .tick {
-  position: absolute;
-  left: 0.08em;
-  bottom: 100%;
-  font-size: 0.62em;
-  opacity: 0;
-  translate: -0.3em 0.5em;
-  transition:
-    translate 0.4s var(--ease),
-    opacity 0.15s;
-}
-.years a:hover .tick,
-.years a:focus-visible .tick {
-  opacity: 1;
-  translate: 0 0.12em;
 }
 
 /* ------------------------------------------------------------------ about */
@@ -646,8 +663,8 @@ button {
 
 .email {
   display: inline-block;
-  /* Two lines on small screens. "matijamaric.com" inks 7.75em. */
-  font-size: calc(100cqi / 7.85);
+  /* Two lines on small screens. "matijamaric.com" inks 7.72em. */
+  font-size: calc(100cqi / 7.74);
   font-weight: 800;
   line-height: 0.95;
   letter-spacing: -0.045em;
@@ -670,8 +687,8 @@ button {
 
 @container (min-width: 34rem) {
   .email {
-    /* One line: the whole address inks 12.19em. */
-    font-size: calc(100cqi / 12.26);
+    /* One line: the whole address inks 12.16em. */
+    font-size: calc(100cqi / 12.18);
   }
   .email span {
     display: inline;
@@ -682,7 +699,7 @@ button {
 }
 
 .contact .links {
-  margin-top: clamp(1.5rem, 4cqi, 2.5rem);
+  margin-top: clamp(1.25rem, 3.5cqi, 2.25rem);
 }
 
 .link-copy {
@@ -703,8 +720,9 @@ button {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0.5rem 2rem;
-  padding-block: 1.25rem 2rem;
+  align-items: baseline;
+  gap: 0.25rem 2rem;
+  padding-block: 1rem 1.75rem;
   border-top: 1px solid var(--ink);
   font-size: 0.8125rem;
   color: var(--muted);
@@ -713,13 +731,17 @@ button {
   display: flex;
   gap: 1.25rem;
 }
+.site-footer a {
+  display: inline-block;
+  padding-block: 0.25rem;
+}
 
-/* ------------------------------------------------------------- wide screens */
+/* ---------------------------------------------------------------- tablet+ */
 
 @media (min-width: 40rem) {
   .name {
-    /* Both words on one line ink 5.78em, so this fills the measure exactly. */
-    font-size: calc(100cqi / 5.785);
+    /* Both words on one line ink 5.752em, so this fills the measure. */
+    font-size: calc(100cqi / 5.76);
     white-space: nowrap;
   }
   .name__line {
@@ -730,45 +752,54 @@ button {
     margin-top: -0.2em;
   }
 
-  .feature__shot img {
-    aspect-ratio: auto;
+  .say {
+    text-align: right;
   }
 
   .years {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     border-bottom: 0;
   }
   .years a {
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: clamp(2rem, 7cqi, 4.5rem);
+    grid-template-columns: 1fr auto;
+    align-content: space-between;
+    row-gap: clamp(2rem, 7cqi, 4.5rem);
     height: 100%;
-    padding: 0.75rem 0.75rem 0.25rem 0;
+    padding: 0 0.75rem 0.25rem 0;
     border-top: 0;
   }
   .years li + li a {
     padding-left: 0.875rem;
     border-left: 1px solid var(--line);
   }
+  .years__arrow {
+    order: 0;
+  }
+  .years__lang {
+    grid-column: 1 / -1;
+    margin-left: var(--bearing);
+  }
 
   .row {
-    grid-template-columns: minmax(0, 2.4fr) minmax(0, 5fr) 3rem 1rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
     grid-template-areas:
-      'name desc year arrow'
-      'name meta year arrow';
-    column-gap: var(--gap);
+      'name desc'
+      'name end';
   }
-  .row__arrow {
-    display: block;
-    grid-area: arrow;
-    align-self: start;
-    margin-top: 0.45rem;
+  .row__name {
+    grid-area: name;
   }
-  .row__year {
-    text-align: right;
+  .row__desc {
+    grid-area: desc;
+  }
+  .row__end {
+    grid-area: end;
   }
 }
 
+/* --------------------------------------------------------------- desktop */
+
+/* Twelve columns. Section labels take the first three, content the rest. */
 @media (min-width: 56rem) {
   .hero__grid,
   .section {
@@ -777,14 +808,12 @@ button {
     column-gap: var(--gap);
   }
 
-  .name {
+  .name,
+  .say {
     grid-column: 1 / -1;
   }
-  .say,
   .lead {
     grid-column: 4 / -1;
-  }
-  .lead {
     grid-row: 3;
   }
   .hero__facts {
@@ -792,7 +821,7 @@ button {
     grid-row: 3;
     align-self: start;
     /* Top rule level with the cap height of the lead's first line. */
-    margin-top: calc(clamp(2.75rem, 7cqi, 5.5rem) + 0.6rem);
+    margin-top: calc(var(--lead-gap) + 0.266 * var(--lead-size));
   }
 
   .section__head {
@@ -808,27 +837,53 @@ button {
     grid-column: 4 / -1;
   }
 
-  .feature__text {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
-    align-items: start;
+  /*
+    Side by side, a label and its content start on one line: the cap height
+    of the label, 1.125rem under the section rule. Each of these pulls its
+    first line of text up by the space above its capitals.
+  */
+  .section__head h2 {
+    margin-top: -0.256em;
   }
-  .feature__text .facts {
-    margin-top: 0.375rem;
+  .years {
+    margin-top: -0.285rem;
   }
+  .prose {
+    margin-top: -0.381em;
+  }
+  .email {
+    margin-top: -0.131em;
+  }
+}
 
-  .about {
-    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
+/* Wide enough to split the content column into thirds that sit on the
+   same twelve columns: titles, text, details. */
+@media (min-width: 72rem) {
+  .feature__text,
+  .about,
+  .row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-areas: none;
     align-items: start;
   }
-  .about .facts {
-    margin-top: 0.3rem;
+  .feature__intro,
+  .prose {
+    grid-column: span 2;
+  }
+  /* Top rule level with the title's cap height. */
+  .feature__text .facts {
+    margin-top: calc(0.156 * var(--title-size));
   }
 
   .row {
-    grid-template-columns: minmax(0, 2.6fr) minmax(0, 4.4fr) minmax(0, 2.4fr) 3rem 1rem;
-    grid-template-areas: 'name desc meta year arrow';
+    align-items: baseline;
   }
-  .row__meta {
+  .row__name,
+  .row__desc,
+  .row__end {
+    grid-area: auto;
+  }
+  .row__end {
     margin-top: 0;
   }
 }
@@ -911,9 +966,8 @@ button {
 /* An accent over the zero, set where the font would put one over a capital. */
 .lost__zero .tick {
   position: absolute;
-  left: 0.42em;
-  top: -0.44em;
-  font-size: 0.49em;
+  left: 0.2em;
+  top: -0.215em;
 }
 .lost__text {
   max-width: 22em;
@@ -921,4 +975,8 @@ button {
   line-height: 1.22;
   letter-spacing: -0.02em;
   text-wrap: pretty;
+}
+.lost__back {
+  font-weight: 600;
+  text-decoration-color: var(--ink);
 }

@@ -19,7 +19,7 @@ function syncThemeUi() {
   // Keep the browser chrome in step with a manually chosen theme.
   document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
     const dark = root.dataset.theme ? theme === 'dark' : meta.media.includes('dark')
-    meta.content = dark ? '#0f0f0e' : '#f4f3ef'
+    meta.content = dark ? '#0e0e0d' : '#f3f3f1'
   })
 }
 
@@ -112,7 +112,11 @@ async function latestPush() {
   })
   if (!response.ok) return null
 
-  const event = (await response.json()).find((e) => e.type === 'PushEvent')
+  // This site and the profile README don't count as news.
+  const housekeeping = /\/(MatijaMaric|MatijaMaric\.github\.io)$/i
+  const event = (await response.json()).find(
+    (e) => e.type === 'PushEvent' && !housekeeping.test(e.repo.name),
+  )
   const push = event ? { repo: event.repo.name, when: event.created_at } : null
   try {
     sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), push }))
@@ -164,6 +168,8 @@ if (copyButton && navigator.clipboard) {
 
   copyButton.hidden = false
   copyButton.addEventListener('click', async () => {
+    // Hold the width so the links beside it don't jump when the label changes.
+    copyButton.style.minWidth = `${copyButton.offsetWidth}px`
     try {
       await navigator.clipboard.writeText(copyButton.dataset.copy)
       label.textContent = 'Copied'
