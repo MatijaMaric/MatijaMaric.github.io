@@ -1,67 +1,65 @@
-# Matija Marić - Personal Portfolio
+# matijamaric.com
 
-Personal portfolio website and developer portfolio hosted on GitHub Pages.
+Personal site of Matija Marić, live at [www.matijamaric.com](https://www.matijamaric.com).
 
-## 🌐 Live Site
+One static page: hand-written HTML and CSS, a small script for the theme switch, the Zagreb clock,
+the latest public GitHub push and the copy-address button. Everything on the page is readable with
+JavaScript turned off. Vite bundles it; there is no framework and no CSS library.
 
-Visit the website at: [www.matijamaric.com](https://www.matijamaric.com)
+## Layout
 
-## 🛠️ Technologies
+| Path             | What it is                                                         |
+| ---------------- | ------------------------------------------------------------------ |
+| `index.html`     | All the content. Edit copy and projects here.                      |
+| `404.html`       | The not-found page GitHub Pages serves.                            |
+| `src/style.css`  | All styles. Colours and spacing are custom properties at the top.  |
+| `src/main.js`    | Progressive enhancements only.                                     |
+| `src/fonts/`     | Schibsted Grotesk and JetBrains Mono, subset to the glyphs in use. |
+| `public/`        | Files copied as they are: icons, preview image, robots, sitemap.   |
+| `tools/og.html`  | Source for `public/og.png`, the link-preview image.                |
 
-- **Vite** - Fast build tool and development server
-- **Vanilla JavaScript** - Pure JavaScript, no frameworks
-- **Tailwind CSS** - Utility-first CSS framework
-- **PostCSS** - CSS transformation with Autoprefixer
-- **GitHub Pages** - Hosting platform
+## Develop
 
-## 🚀 Development
-
-### Prerequisites
-
-- Node.js (v20 or higher)
-- npm
-
-### Setup
+Needs Node 20.19 or newer.
 
 ```bash
-# Install dependencies
 npm install
+```
 
-# Start development server
+```bash
 npm run dev
+```
 
-# Build for production
+```bash
 npm run build
+```
 
-# Preview production build
+```bash
 npm run preview
 ```
 
-## 📦 Deployment
+## Things worth knowing
 
-The site is automatically deployed to GitHub Pages using GitHub Actions when changes are pushed to the `master` branch.
+- **The headline is sized to fit.** `.name` and `.email` in `src/style.css` divide the container
+  width by the text's measured width in ems. If the name, the address, the font or the
+  letter-spacing changes, those divisors need measuring again.
+- **The red accent on the ć is the same glyph drawn twice**, once in ink with the accent clipped
+  off and once in red with the letter clipped off. `--split` on `.c-acute` is where the cut falls.
+- **The fonts are subsets.** They cover Basic Latin, Latin-1, Croatian letters and a few arrows and
+  dashes. A character outside that set falls back to the system font; re-subset from the upstream
+  files with `pyftsubset` to add more.
+- **Regenerating the preview image** after changing `tools/og.html`:
 
-### Deployment Workflow
+  ```bash
+  npx playwright screenshot --viewport-size=1200,630 tools/og.html public/og.png
+  ```
 
-1. Push changes to the `master` branch
-2. GitHub Actions automatically builds the site using `npm run build`
-3. The built files from the `dist` folder are deployed to the `gh-pages` branch
-4. GitHub Pages serves the site from the `gh-pages` branch
+## Deploy
 
-### Custom Domain
+Pushing to `master` runs `.github/workflows/deploy.yml`, which builds the site and publishes `dist`
+to the `gh-pages` branch. GitHub Pages serves that branch at the domain in `public/CNAME`.
 
-The custom domain `www.matijamaric.com` is configured via the CNAME file in the `public` directory. Make sure to:
-1. Configure DNS settings to point to GitHub Pages
-2. Enable GitHub Pages in repository settings (Settings → Pages → Source: Deploy from a branch → Branch: gh-pages)
+## Licence
 
-### Troubleshooting
-
-**MIME Type Error**: If you see an error like "Loading module from https://matijamaric.github.io/src/style.css was blocked because of a disallowed MIME type", it means:
-- GitHub Pages is not configured correctly
-- Make sure Pages is set to deploy from the `gh-pages` branch (not master)
-- Wait for the GitHub Actions workflow to complete after pushing to master
-- The gh-pages branch should contain the built files, not the source code
-
-## 📝 License
-
-© 2024 Matija Marić. All rights reserved.
+Site content © Matija Marić. The fonts are under the SIL Open Font License; the licence texts sit
+next to them in `src/fonts/`.

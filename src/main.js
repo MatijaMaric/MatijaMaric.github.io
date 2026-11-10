@@ -1,99 +1,180 @@
-import './style.css'
+// Everything on the page works without this file. It adds the theme switch,
+// the Zagreb clock, the latest public GitHub push and the copy-address button.
 
-// Set up dark mode based on system preference
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-  document.documentElement.classList.add('dark')
+const root = document.documentElement
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+const systemDark = window.matchMedia('(prefers-color-scheme: dark)')
+
+/* ------------------------------------------------------------------ theme */
+
+const toggle = document.querySelector('[data-theme-toggle]')
+const toggleLabel = document.querySelector('[data-theme-label]')
+
+const currentTheme = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light')
+
+function syncThemeUi() {
+  const theme = currentTheme()
+  toggleLabel.textContent = `Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`
+
+  // Keep the browser chrome in step with a manually chosen theme.
+  document.querySelectorAll('meta[name="theme-color"]').forEach((meta) => {
+    const dark = root.dataset.theme ? theme === 'dark' : meta.media.includes('dark')
+    meta.content = dark ? '#0f0f0e' : '#f4f3ef'
+  })
 }
 
-document.querySelector('#app').innerHTML = `
-  <header class="glass-strong sticky top-0 z-[100] py-4 shadow-lg">
-    <nav class="max-w-screen-xl mx-auto px-8 flex justify-between items-center flex-col md:flex-row gap-4 md:gap-0">
-      <h1 class="text-2xl font-bold text-white subtle-glow-blue">Matija Marić</h1>
-      <ul class="flex list-none gap-8 md:gap-8 flex-col md:flex-row text-center md:text-left">
-        <li><a href="#about" class="font-medium text-gray-200 hover:text-white smooth-transition hover:subtle-glow-cyan">About</a></li>
-        <li><a href="#skills" class="font-medium text-gray-200 hover:text-white smooth-transition hover:subtle-glow-cyan">Skills</a></li>
-        <li><a href="#projects" class="font-medium text-gray-200 hover:text-white smooth-transition hover:subtle-glow-cyan">Projects</a></li>
-        <li><a href="#contact" class="font-medium text-gray-200 hover:text-white smooth-transition hover:subtle-glow-cyan">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+function setTheme(theme) {
+  // Choosing what the system already wants clears the override.
+  if (theme === (systemDark.matches ? 'dark' : 'light')) {
+    delete root.dataset.theme
+    try {
+      localStorage.removeItem('theme')
+    } catch {}
+  } else {
+    root.dataset.theme = theme
+    try {
+      localStorage.setItem('theme', theme)
+    } catch {}
+  }
+  syncThemeUi()
+}
 
-  <main class="flex-1">
-    <section class="relative py-32 px-8 text-center overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-pink-900/20"></div>
-      <div class="max-w-3xl mx-auto relative z-10">
-        <h2 class="text-5xl md:text-6xl font-bold mb-6 text-white subtle-glow-purple">Software Engineer</h2>
-        <p class="text-xl mb-10 text-gray-300">Full-stack developer specializing in C#, JavaScript, and modern web technologies</p>
-        <a href="#contact" class="apple-button inline-block py-4 px-10 rounded-2xl font-semibold text-white">Get In Touch</a>
-      </div>
-    </section>
+toggle.hidden = false
+syncThemeUi()
+systemDark.addEventListener('change', syncThemeUi)
 
-    <section id="about" class="py-20 px-8 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-blue">About Me</h2>
-      <div class="glass-card rounded-3xl p-8 md:p-12">
-        <p class="text-lg max-w-3xl mx-auto text-center text-gray-300 leading-relaxed">
-          Software engineer with experience in full-stack development across multiple programming languages and frameworks. 
-          Passionate about clean code, problem-solving, and building efficient solutions. Active participant in coding challenges 
-          including Advent of Code, demonstrating strong algorithmic thinking and adaptability to different programming paradigms.
-        </p>
-      </div>
-    </section>
+toggle.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark'
 
-    <section id="skills" class="py-20 px-8 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-cyan">Skills</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-blue-300 font-semibold">Frontend</h3>
-          <p class="text-gray-300">JavaScript, React, Vue, Tailwind CSS, Vite</p>
-        </div>
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-cyan-300 font-semibold">Backend</h3>
-          <p class="text-gray-300">C#, .NET, Node.js, Python, Go</p>
-        </div>
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">Other Languages</h3>
-          <p class="text-gray-300">Rust, Python, Go, SQL</p>
-        </div>
-      </div>
-    </section>
+  if (!document.startViewTransition || reducedMotion.matches) {
+    setTheme(next)
+    return
+  }
 
-    <section id="projects" class="py-20 px-8 max-w-screen-xl mx-auto">
-      <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-purple">Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-purple-300 font-semibold">WakeOnLan</h3>
-          <p class="text-gray-300 mb-4">C# utility application for network device management using Wake-on-LAN protocol</p>
-          <a href="https://github.com/MatijaMaric/WakeOnLan" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300">View on GitHub →</a>
-        </div>
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-cyan-300 font-semibold">Advent of Code</h3>
-          <p class="text-gray-300 mb-4">Solutions to Advent of Code challenges (2017-2021) in Python, Rust, Go, and C#</p>
-          <a href="https://github.com/MatijaMaric?tab=repositories&q=aoc" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:text-cyan-300">View Projects →</a>
-        </div>
-        <div class="glass-card rounded-3xl p-8 smooth-transition glass-hover">
-          <h3 class="text-2xl mb-4 text-blue-300 font-semibold">speedlog</h3>
-          <p class="text-gray-300 mb-4">JavaScript application for tracking and logging speed-related data</p>
-          <a href="https://github.com/MatijaMaric/speedlog" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300">View on GitHub →</a>
-        </div>
-      </div>
-    </section>
+  // Sweep the new theme out from the button.
+  const box = toggle.getBoundingClientRect()
+  const x = box.left + box.width / 2
+  const y = box.top + box.height / 2
+  const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y))
 
-    <section id="contact" class="py-20 px-8 max-w-screen-xl mx-auto text-center">
-      <h2 class="text-4xl font-bold mb-10 text-center text-white subtle-glow-cyan">Get In Touch</h2>
-      <div class="glass-card rounded-3xl p-8 md:p-12 mb-8">
-        <p class="text-lg max-w-2xl mx-auto text-gray-300">
-          I'm always open to discussing new projects, opportunities, or collaborations.
-        </p>
-      </div>
-      <div class="flex justify-center gap-6 flex-wrap">
-        <a href="https://github.com/MatijaMaric" target="_blank" rel="noopener noreferrer" class="apple-button py-3 px-8 rounded-2xl font-medium text-white">GitHub</a>
-        <a href="https://www.linkedin.com/in/matija-maric/" target="_blank" rel="noopener noreferrer" class="apple-button py-3 px-8 rounded-2xl font-medium text-white">LinkedIn</a>
-        <a href="mailto:contact@matijamaric.com" class="apple-button py-3 px-8 rounded-2xl font-medium text-white">Email</a>
-      </div>
-    </section>
-  </main>
+  document.startViewTransition(() => setTheme(next)).ready.then(() => {
+    root.animate(
+      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+      {
+        duration: 550,
+        easing: 'cubic-bezier(0.3, 0, 0.2, 1)',
+        pseudoElement: '::view-transition-new(root)',
+      },
+    )
+  })
+})
 
-  <footer class="glass py-8 text-center text-gray-400 border-t border-white/10">
-    <p>&copy; ${new Date().getFullYear()} Matija Marić. All rights reserved.</p>
-  </footer>
-`
+/* ------------------------------------------------------------------ clock */
+
+const clock = document.querySelector('[data-clock]')
+
+if (clock) {
+  const format = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Zagreb',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+
+  const tick = () => {
+    const now = new Date()
+    clock.textContent = format.format(now)
+    clock.dateTime = now.toISOString()
+    // Wake up again just after the next minute turns over.
+    setTimeout(tick, 60_000 - (now.getSeconds() * 1000 + now.getMilliseconds()) + 50)
+  }
+
+  tick()
+  clock.hidden = false
+  document.querySelector('[data-clock-sep]').hidden = false
+  clock.title = 'Local time in Zagreb'
+}
+
+/* ----------------------------------------------------------------- lately */
+
+// Swap the static "Lately" line for the most recent public push, if GitHub
+// answers. Any failure leaves the static line alone.
+const lately = document.querySelector('[data-lately]')
+
+async function latestPush() {
+  const cacheKey = 'lately'
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(cacheKey))
+    if (cached && Date.now() - cached.at < 10 * 60_000) return cached.push
+  } catch {}
+
+  const response = await fetch('https://api.github.com/users/MatijaMaric/events/public?per_page=30', {
+    headers: { Accept: 'application/vnd.github+json' },
+  })
+  if (!response.ok) return null
+
+  const event = (await response.json()).find((e) => e.type === 'PushEvent')
+  const push = event ? { repo: event.repo.name, when: event.created_at } : null
+  try {
+    sessionStorage.setItem(cacheKey, JSON.stringify({ at: Date.now(), push }))
+  } catch {}
+  return push
+}
+
+function timeAgo(date) {
+  const format = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+  const minutes = Math.round((date - Date.now()) / 60_000)
+  if (Math.abs(minutes) < 60) return format.format(minutes, 'minute')
+  const hours = Math.round(minutes / 60)
+  if (Math.abs(hours) < 24) return format.format(hours, 'hour')
+  const days = Math.round(hours / 24)
+  if (Math.abs(days) < 30) return format.format(days, 'day')
+  return format.format(Math.round(days / 30), 'month')
+}
+
+if (lately) {
+  latestPush()
+    .then((push) => {
+      if (!push) return
+      const when = new Date(push.when)
+      // Older than a couple of months says less than the static line does.
+      if (Number.isNaN(when.getTime()) || Date.now() - when > 60 * 86_400_000) return
+
+      const link = document.createElement('a')
+      link.href = `https://github.com/${push.repo}`
+      link.rel = 'noopener'
+      link.textContent = push.repo.split('/').pop()
+
+      const time = document.createElement('time')
+      time.dateTime = when.toISOString()
+      time.textContent = timeAgo(when)
+
+      lately.replaceChildren('Pushed to ', link, ' ', time)
+    })
+    .catch(() => {})
+}
+
+/* ------------------------------------------------------------------- copy */
+
+const copyButton = document.querySelector('[data-copy]')
+
+if (copyButton && navigator.clipboard) {
+  const label = copyButton.querySelector('[data-copy-label]')
+  const idle = label.textContent
+  let reset
+
+  copyButton.hidden = false
+  copyButton.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(copyButton.dataset.copy)
+      label.textContent = 'Copied'
+    } catch {
+      label.textContent = 'Couldn’t copy'
+    }
+    clearTimeout(reset)
+    reset = setTimeout(() => (label.textContent = idle), 1800)
+  })
+}
+
+/* ------------------------------------------------------------------- year */
+
+document.querySelector('[data-year]').textContent = new Date().getFullYear()

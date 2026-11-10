@@ -1,15 +1,14 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'node:path'
 
 export default defineConfig({
   base: '/',
   build: {
-    // Generate unique hashes for each build to prevent caching issues
     rollupOptions: {
-      output: {
-        entryFileNames: 'assets/[name]-[hash].js',
-        chunkFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
-      }
-    }
-  }
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        notFound: resolve(import.meta.dirname, '404.html'),
+      },
+    },
+  },
 })

@@ -1,0 +1,83 @@
+<!doctype html>
+<!--
+  Source for public/og.png, the link-preview image. Open this file in a
+  browser at 1200x630 and screenshot it, or run:
+
+    npx playwright screenshot --viewport-size=1200,630 tools/og.html public/og.png
+-->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      @font-face {
+        font-family: 'Schibsted Grotesk';
+        src: url('../src/fonts/schibsted-grotesk.woff2') format('woff2');
+        font-weight: 400 900;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('../src/fonts/jetbrains-mono.woff2') format('woff2');
+        font-weight: 400 600;
+      }
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 1200px;
+        height: 630px;
+        padding: 56px 64px 60px;
+        background: #f4f3ef;
+        color: #131312;
+        font-family: 'Schibsted Grotesk', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        font: 22px 'JetBrains Mono', monospace;
+        color: #63625d;
+      }
+      h1 {
+        font-size: 185.3px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.045em;
+        margin-left: -0.031em;
+        white-space: nowrap;
+      }
+      .c {
+        --split: 0.3em;
+        position: relative;
+        display: inline-block;
+        line-height: 1;
+      }
+      .c span {
+        display: inline-block;
+        clip-path: inset(var(--split) -0.3em -0.4em -0.3em);
+      }
+      .c::after {
+        content: 'ć';
+        position: absolute;
+        inset: 0;
+        color: #e03a1e;
+        clip-path: inset(-0.4em -0.3em calc(100% - var(--split)) -0.3em);
+      }
+      p {
+        padding-top: 22px;
+        border-top: 2px solid #131312;
+        font-size: 44px;
+        line-height: 1.15;
+        letter-spacing: -0.02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top"><span>matijamaric.com</span><span>Zagreb, Croatia</span></div>
+    <h1>Matija Mari<span class="c"><span>ć</span></span></h1>
+    <p>Software engineer. Self-hosted software after hours.</p>
+  </body>
+</html>
